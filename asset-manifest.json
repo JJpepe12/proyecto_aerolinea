@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/proyecto_aerolinea/static/js/main.6f642019.js",
+    "static/media/famahorro.svg": "/proyecto_aerolinea/static/media/famahorro.f910365f3818eac1750cd956abd5478e.svg",
+    "static/media/paypal.svg": "/proyecto_aerolinea/static/media/paypal.fa70400ceb8af2838a953f5b6992b3bf.svg",
+    "static/media/mastercard.svg": "/proyecto_aerolinea/static/media/mastercard.7af051105caed8f5eeb1b8fc840b64d6.svg",
+    "static/media/walmart.svg": "/proyecto_aerolinea/static/media/walmart.d66cf1a0cf7db9a98b2f15372b3ee06d.svg",
+    "static/media/seven.svg": "/proyecto_aerolinea/static/media/seven.44ce1df7fb2221a1d0a61077fa744a3f.svg",
+    "static/media/oxxo.svg": "/proyecto_aerolinea/static/media/oxxo.098d19130714a602aaefa3bb90413518.svg",
+    "static/media/amex.svg": "/proyecto_aerolinea/static/media/amex.a045894b138a73b6ff7ffb543ce7a267.svg",
+    "static/media/visa.svg": "/proyecto_aerolinea/static/media/visa.b526b41f37e15daf7d2c28738f5c7241.svg",
+    "static/media/transportation.svg": "/proyecto_aerolinea/static/media/transportation.57b5ec9d8441eef86c4a1b58b9121981.svg",
+    "static/media/invex.svg": "/proyecto_aerolinea/static/media/invex.e5e398edd5ded665c5af4af2ad5369fe.svg",
+    "static/media/groups.svg": "/proyecto_aerolinea/static/media/groups.9f6d6fe36bd7b8b464d7dc0de8c95403.svg",
+    "static/media/hotels.svg": "/proyecto_aerolinea/static/media/hotels.7fb6451b1fd49d3a4c1d2e93e1008a9b.svg",
+    "static/media/yavas.svg": "/proyecto_aerolinea/static/media/yavas.712ebc854873805ca28f40c78f1ca60e.svg",
+    "static/media/cargo.svg": "/proyecto_aerolinea/static/media/cargo.1d32adacf39737abb9704473fb2ffbf4.svg",
+    "index.html": "/proyecto_aerolinea/index.html",
+    "main.6f642019.js.map": "/proyecto_aerolinea/static/js/main.6f642019.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6f642019.js"
+  ]
+}
