@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StylesCards = styled.article`
 width: 270px;
-height: 300px;
 display: flex;
 align-items: center;
 text-align: center;

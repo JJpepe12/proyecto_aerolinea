@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyles from "./StyleApp";
-import Services from '../Footer/Services'
+import ServicesCards from '../Footer/Services'
 import Payments from "../Main/Payments";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
         <>
         <GlobalStyles /> 
         <Payments />
-        <Services/>
+        <ServicesCards />
         </>
     );
 };

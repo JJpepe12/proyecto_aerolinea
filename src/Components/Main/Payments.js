@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledTitle, StylesPayments } from './StylesPayments';
+import { StyledSection, StyledPayments } from './StylesPayments';
 import Amex from "../../assets/pagos/amex.svg";
 import PayPal from "../../assets/pagos/paypal.svg";
 import Invex from "../../assets/pagos/invex.svg";
@@ -9,18 +9,15 @@ import Oxxo from "../../assets/pagos/oxxo.svg";
 import Seven from "../../assets/pagos/seven.svg";
 import Walmart from "../../assets/pagos/walmart.svg";
 import FarmaAhorros from "../../assets/pagos/famahorro.svg";
-import ServicesCards from '../Footer/Services';
 
 
 const Payments = () => {
     return (
-        <div>
-        <StyledTitle>
-            <h3>Pago seguro</h3>
-        </StyledTitle>
-        <StylesPayments>
+        <StyledSection className='pagos'>
+        <h1> Pago seguro </h1>
+        <StyledPayments>
             <div>
-                <h4>Tarjeta de crédito, tarjeta débito y pago electrónico</h4>
+                <h2>Tarjeta de crédito, tarjeta débito y pago electrónico</h2>
                     <ul>
                         <li> <img src={ Amex }  alt="Amex" /> </li>
                         <li> <img src={ PayPal }  alt="PayPal" /> </li>
@@ -30,7 +27,7 @@ const Payments = () => {
                     </ul>
             </div>
             <div>
-                <h4>Efectivo en cualquiera de las sucursales participantes</h4>
+                <h2>Efectivo en cualquiera de las sucursales participantes</h2>
                     <ul>
                         <li> <img src={ Oxxo }  alt="Oxxo" /> </li>
                         <li> <img src={ Seven }  alt="Seven" /> </li>
@@ -38,11 +35,8 @@ const Payments = () => {
                         <li> <img src={ FarmaAhorros }  alt="FarmaAhorros" /> </li>
                     </ul>
             </div>
-        </StylesPayments>
-        <ServicesCards />
-        
-        
-        </div>
+        </StyledPayments>
+        </StyledSection>
     )
 }
 

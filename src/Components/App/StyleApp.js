@@ -29,11 +29,10 @@ h4,
 h5,
 h6 {
   font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 p {

@@ -1,14 +1,14 @@
 import React from "react";
 import { StylesCards } from "./StylesCards";
 
-const Cards = ({ services }) => {
+const Cards = ({ service }) => {
   return (
     <StylesCards>
       <figure>
-        <img src={services.image} alt={services.name} />
+        <img src={service.image} alt={service.name} />
       </figure>
-      <h3>{services.name}</h3>
-      <p>{services.description}</p>
+      <h3>{service.name}</h3>
+      <p>{service.description}</p>
     </StylesCards>
   );
 };
