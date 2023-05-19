@@ -1,12 +1,14 @@
 import React from "react";
 import GlobalStyles from "./StyleApp";
-import Footer from '../Footer/Footer'
+import ServicesCards from '../Footer/Services'
+import Payments from "../Main/Payments";
 
 const App = () => {
     return (
         <>
         <GlobalStyles /> 
-        <Footer/>
+        <Payments />
+        <ServicesCards />
         </>
     );
 };
