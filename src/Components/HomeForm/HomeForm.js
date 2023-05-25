@@ -1,5 +1,12 @@
 import { useState } from "react";
 import imageAvion from "../../assets/avion.webp";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import styled from "styled-components";
+import PlaneIcon from "../../assets/icons/plane.svg";
+import Search from "../../assets/icons/search.svg";
+import ModalDestinos from "./ModalDestinos";
 import {
   Box,
   Button,
@@ -8,14 +15,10 @@ import {
   Paper,
   TextField,
   Typography,
+  Icon,
   ButtonGroup,
 } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import styled from "styled-components";
 
-import ModalDestinos from "./ModalDestinos";
 const HomeForm = () => {
   const [value, setValue] = useState(null);
   const [dataPiker, setDataPiker] = useState(null);
@@ -59,14 +62,49 @@ const HomeForm = () => {
             sx={{ minHeigtht: "100vh" }}
           ></Grid>
           <Grid item>
-            <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
-              <Typography variant="h4">
+            <Paper sx={{ padding: "1em", borderRadius: "0.5em" }}>
+              <Typography variant="h4" margin="10px">
                 Busca un nuevo destino y comienza la aventura
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="h6" margin="10px">
                 Descubre vuelos al mejor precio y perfectos para cualquier lugar
               </Typography>
-
+              <Viajes>
+                <Box
+                  border={1}
+                  borderColor="gray"
+                  p={0}
+                  width={270}
+                  height={30}
+                  color="white"
+                  borderRadius={2}
+                >
+                  <Button
+                    color="primary"
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "#80206a",
+                        color: "white",
+                      },
+                      height: "30px",
+                    }}
+                  >
+                    <TextDecorationButton>Viaje redondo</TextDecorationButton>
+                  </Button>
+                  <Button
+                    color="secondary"
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: " #80206a",
+                        color: "white",
+                      },
+                      height: "30px",
+                    }}
+                  >
+                    <TextDecorationButton>Viaje sencillo</TextDecorationButton>
+                  </Button>
+                </Box>
+              </Viajes>
               <Box component="form">
                 <TextField
                   onClick={handleOpenModal1}
@@ -77,10 +115,20 @@ const HomeForm = () => {
                   open={modal1Open}
                   onClose={handleCloseModal1}
                   title="¿Dónde te encuentras?"
-                  content="Contenido de la Ventana Modal 1"
-                  buttonText="Cerrar Modal 1"
+                  content={
+                    <TextField
+                      fullWidth
+                      sx={{ mb: 2 }}
+                      InputProps={{
+                        startAdornment: (
+                          <Icon>
+                            <img src={Search} />
+                          </Icon>
+                        ),
+                      }}
+                    />
+                  }
                 />
-
                 <TextField
                   onClick={handleOpenModal2}
                   label="Destino"
@@ -89,28 +137,40 @@ const HomeForm = () => {
                 <ModalDestinos
                   open={modal2Open}
                   onClose={handleCloseModal2}
-                  title=""
-                  content="¿A dónde viajas?"
+                  title="¿A dónde viajas?"
+                  content={
+                    <TextField
+                      fullWidth
+                      sx={{ mb: 2 }}
+                      InputProps={{
+                        startAdornment: (
+                          <Icon>
+                            <img src={Search} />
+                          </Icon>
+                        ),
+                      }}
+                    />
+                  }
                   buttonText="Cerrar Modal 2"
                 />
-                <Labels>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Box
+                    sx={{ display: "flex", m: 0.5, width: "53ch", gap: "25px" }}
+                  >
                     <DatePicker
                       label="Salida"
                       value={value}
                       onChange={(newValue) => setValue(newValue)}
                       renderInput={(props) => <TextField {...props} />}
                     />
-                  </LocalizationProvider>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Regreso"
                       value={dataPiker}
                       onChange={(newValue) => setDataPiker(newValue)}
                       renderInput={(props) => <TextField {...props} />}
                     />
-                  </LocalizationProvider>
-                </Labels>
+                  </Box>
+                </LocalizationProvider>
                 <TextField
                   onClick={handleOpenModal3}
                   label="Pasajeros"
@@ -119,18 +179,71 @@ const HomeForm = () => {
                 <ModalDestinos
                   open={modal3Open}
                   onClose={handleCloseModal3}
-                  title="Título de la Ventana Modal 3"
-                  content="Contenido de la Ventana Modal 3"
-                  buttonText="Cerrar Modal 3"
+                  content={
+                    <CantidadPasajeros>
+                      <>
+                        <ul>
+                          <li>Adultos</li>
+                          <li>(13 + años)</li>
+                          <li>Niños</li>
+                          <li>(2 - 12 años)</li>
+                          <li>Bebes</li>
+                          <li>(5 - 28 meses)</li>
+                        </ul>
+                       
+                      </>
+                      <Pasajeros>
+                        <ButtonGroup
+                          variant="outlined"
+                          aria-label="outlined button group"
+                        >
+                          <Adultos>
+                            <Button>-</Button>
+                            <Button>0</Button>
+                            <Button>+</Button>
+                          </Adultos>
+                        </ButtonGroup>
+                        <ButtonGroup
+                          variant="outlined"
+                          aria-label="outlined button group"
+                        >
+                          <Niños>
+                            <Button>-</Button>
+                            <Button>0</Button>
+                            <Button>+</Button>
+                          </Niños>
+                        </ButtonGroup>
+                        <ButtonGroup
+                          variant="outlined"
+                          aria-label="outlined button group"
+                        >
+                          <Bebes>
+                            <Button>-</Button>
+                            <Button>0</Button>
+                            <Button>+</Button>
+                          </Bebes>
+                        </ButtonGroup>
+                      </Pasajeros>
+                    </CantidadPasajeros>
+                  }
                 />
-
                 <TextField
                   label="¿Tienes algun codigo de promocion?"
-                  sx={{ m: 1, width: "30ch" }}
+                  sx={{ m: 1, width: "25ch" }}
                 />
                 <StyledButton>
-                  <Button fullWidth type="submit">
-                    Buscar vuelos
+                  <Button
+                    fullWidth
+                    type="submit"
+                    startIcon={
+                      <img
+                        src={PlaneIcon}
+                        alt="Plane Icon"
+                        style={{ color: "blue" }}
+                      />
+                    }
+                  >
+                    <TextDecoration>Buscar vuelos</TextDecoration>
                   </Button>
                 </StyledButton>
               </Box>
@@ -147,30 +260,66 @@ export default HomeForm;
 const StyledButton = styled.div`
   background-color: #80206a;
   border-radius: 25px;
+  width: 28rem;
+  color: white;
 `;
 
-const Labels = styled.div`
-  margin-top: 5px;
-  width: 80%;
-  display: flex;
-  justify-content: space-around;
-`;
 const Figure = styled.div`
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
     url(${imageAvion});
-  min-height: 100px;
-  min-width: 100px;
-  width: 100vh;
-  height: 80vh;
+  min-height: 300px;
+  min-width: 300px;
+  width: 890px;
+  height: 85vh;
   background-position: center;
   background-size: cover;
   border-radius: 30px;
-  margin-left: 250px;
- 
+  margin-left: 350px;
+  margin-top: 70px;
 `;
 
 const Formulario = styled.section`
   position: absolute;
-  margin-top: -460px;
-  margin-left: 50px;
+  margin-top: -535px;
+  margin-left: 150px;
+  width: 33rem;
+ 
 `;
+
+const Viajes = styled.div`
+  margin-left: 11px;
+`;
+const TextDecoration = styled.div`
+  color: white;
+`;
+const TextDecorationButton = styled.div`
+  color: black;
+`;
+const Pasajeros = styled.div`
+  flex-direction: column;
+  display: flex;
+  margin-left: 250px;
+`;
+const Adultos = styled.div`
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 0;
+`;
+const Niños = styled.div`
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+`;
+const Bebes = styled.div`
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+`;
+const CantidadPasajeros = styled.div`
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+`;
+
+
