@@ -26,20 +26,22 @@ const HomeForm = () => {
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
-
-  const [searchOrigen,setSearchOrigen]=useState('');
-  const [searchDestino,setSearchDestino]=useState('');
-  const [dataVuelosOrigen,setDataVuelosOrigen]=useState([]);
-const handleSearchOrigen=async(event)=>{
-  setSearchOrigen(event.target.value);
-  console.log(searchOrigen);
-  const response = await axios.get('http://localhost:3004/flights')
-  console.log(response.data);
-  const filterVuelos= response.data.filter((flight)=>
-  flight.departure.airport.toLowerCase().includes(searchOrigen.toLowerCase()))
-  console.log(filterVuelos);
-  setDataVuelosOrigen(dataVuelosOrigen);
-}
+  const [searchOrigen, setSearchOrigen] = useState("");
+  const [searchDestino, setSearchDestino] = useState("");
+  const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
+  const handleSearchOrigen = async (event) => {
+    setSearchOrigen(event.target.value);
+    console.log(searchOrigen);
+    const response = await axios.get("http://localhost:3004/flights");
+    console.log(response.data);
+    const filterVuelos = response.data.filter((flight) =>
+      flight.departure.airport
+        .toLowerCase()
+        .includes(searchOrigen.toLowerCase())
+    );
+    console.log(filterVuelos);
+    setDataVuelosOrigen(dataVuelosOrigen);
+  };
 
   const handleOpenModal1 = () => {
     setModal1Open(true);
@@ -63,7 +65,6 @@ const handleSearchOrigen=async(event)=>{
   const handleCloseModal3 = () => {
     setModal3Open(false);
   };
-  
 
   return (
     <section>
@@ -127,39 +128,40 @@ const handleSearchOrigen=async(event)=>{
                   label="Origen"
                   sx={{ m: 1, width: "25ch" }}
                 />
-  <ModalDestinos
-  open={modal1Open}
-  onClose={handleCloseModal1}
-  title="¿Dónde te encuentras?"
-  content={
-    <>
-      <TextField
-        fullWidth
-        sx={{ mb: 2 }}
-        InputProps={{
-          startAdornment: (
-            <Icon>
-              <img src={Search} alt="Search Icon" />
-            </Icon>
-          ),
-        }}
-        value={searchOrigen}
-        onChange={handleSearchOrigen}
-      />
+                <ModalDestinos
+                  open={modal1Open}
+                  onClose={handleCloseModal1}
+                  title="¿Dónde te encuentras?"
+                  content={
+                    <>
+                      <TextField
+                        fullWidth
+                        sx={{ mb: 2 }}
+                        InputProps={{
+                          startAdornment: (
+                            <Icon>
+                              <img src={Search} alt="Search Icon" />
+                            </Icon>
+                          ),
+                        }}
+                        value={searchOrigen}
+                        onChange={handleSearchOrigen}
+                        
+                      />
 
-      <div>
-        { dataVuelosOrigen.length ? (
-          dataVuelosOrigen.map((item, index) => (
-            <span key={index}>{item.departure.airport}</span>
-          ))
-        ) : (
-          <span>sin coincidencias</span>
-        )}
-      </div>
-    </>
-  }
-/>
-               
+                      <div>
+                        {dataVuelosOrigen.length ? (
+                          dataVuelosOrigen.map((item, index) => (
+                            <span key={index}>{item.departure.airport}</span>
+                          ))
+                        ) : (
+                          <span>sin coincidencias</span>
+                        )}
+                      </div>
+                    </>
+                  }
+                />
+
                 <TextField
                   onClick={handleOpenModal2}
                   label="Destino"
@@ -171,32 +173,32 @@ const handleSearchOrigen=async(event)=>{
                   title="¿A dónde viajas?"
                   content={
                     <>
-      <TextField
-        fullWidth
-        sx={{ mb: 2 }}
-        InputProps={{
-          startAdornment: (
-            <Icon>
-              <img src={Search} alt="Search Icon" />
-            </Icon>
-          ),
-        }}
-        value={searchDestino}
-        onChange={handleSearchOrigen}
-      />
+                      <TextField
+                        fullWidth
+                        sx={{ mb: 2 }}
+                        InputProps={{
+                          startAdornment: (
+                            <Icon>
+                              <img src={Search} alt="Search Icon" />
+                            </Icon>
+                          ),
+                        }}
+                        value={searchDestino}
+                        onChange={handleSearchOrigen}
+                      />
 
-      <div>
-        { dataVuelosOrigen.length ? (
-          dataVuelosOrigen.map((item, index) => (
-            <span key={index}>{item.departure.airport}</span>
-          ))
-        ) : (
-          <span>sin coincidencias</span>
-        )}
-      </div>
-    </>
-  }
-/>
+                      <div>
+                        {dataVuelosOrigen.length ? (
+                          dataVuelosOrigen.map((item, index) => (
+                            <span key={index}>{item.departure.airport}</span>
+                          ))
+                        ) : (
+                          <span>sin coincidencias</span>
+                        )}
+                      </div>
+                    </>
+                  }
+                />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box
                     sx={{ display: "flex", m: 0.5, width: "53ch", gap: "25px" }}
@@ -226,20 +228,18 @@ const handleSearchOrigen=async(event)=>{
                   content={
                     <CantidadPasajeros>
                       <>
-                        <ul>
-                          <li>Adultos</li>
-                          <li>(13 + años)</li>
-                          <li>Niños</li>
-                          <li>(2 - 12 años)</li>
-                          <li>Bebes</li>
-                          <li>(5 - 28 meses)</li>
-                        </ul>
                        
+                          <p>Adultos (13 + años)</p>
+                         
+                          <p>Niños (2 - 12 años)</p>
+                          
+                          <p>Bebes (5 - 28 meses)</p>
+                         
+                        
                       </>
                       <Pasajeros>
                         <ButtonGroup
-                          variant="outlined"
-                          aria-label="outlined button group"
+                        color="secondary" aria-label="medium secondary button group"
                         >
                           <Adultos>
                             <Button>-</Button>
@@ -248,8 +248,7 @@ const handleSearchOrigen=async(event)=>{
                           </Adultos>
                         </ButtonGroup>
                         <ButtonGroup
-                          variant="outlined"
-                          aria-label="outlined button group"
+                          color="secondary" aria-label="medium secondary button group"
                         >
                           <Niños>
                             <Button>-</Button>
@@ -258,8 +257,7 @@ const handleSearchOrigen=async(event)=>{
                           </Niños>
                         </ButtonGroup>
                         <ButtonGroup
-                          variant="outlined"
-                          aria-label="outlined button group"
+                         color="secondary" aria-label="medium secondary button group"
                         >
                           <Bebes>
                             <Button>-</Button>
@@ -327,7 +325,6 @@ const Formulario = styled.section`
   margin-top: -535px;
   margin-left: 150px;
   width: 33rem;
- 
 `;
 
 const Viajes = styled.div`
@@ -343,6 +340,8 @@ const Pasajeros = styled.div`
   flex-direction: column;
   display: flex;
   margin-left: 250px;
+  margin-top: -150px;
+
 `;
 const Adultos = styled.div`
   display: flex;
@@ -360,10 +359,13 @@ const Bebes = styled.div`
   margin-top: 20px;
   margin-left: 10px;
 `;
-const CantidadPasajeros = styled.div`
-  display: flex;
-  width: 100%;
-  text-decoration: none;
+const CantidadPasajeros = styled.p`
+  white-space: pre;
+ 
+::after {
+  
+  white-space: pre;
+  
+}
 `;
-
 
