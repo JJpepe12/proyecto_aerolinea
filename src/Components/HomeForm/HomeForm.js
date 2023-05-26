@@ -42,6 +42,48 @@ const HomeForm = () => {
     console.log(filterVuelos);
     setDataVuelosOrigen(dataVuelosOrigen);
   };
+  const [contadorNiños, setContadorNiños] = useState(0);
+  const [contadorAdultos, setContadorAdultos] = useState(0);
+  const [contadorBebes, setContadorBebes] = useState(0);
+
+  const sumarContador = (cantidad, tipo) => {
+    switch (tipo) {
+      case "niños":
+        setContadorNiños(contadorNiños + cantidad);
+        break;
+      case "adultos":
+        setContadorAdultos(contadorAdultos + cantidad);
+        break;
+      case "bebes":
+        setContadorBebes(contadorBebes + cantidad);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const restarContador = (cantidad, tipo) => {
+    switch (tipo) {
+      case "adultos":
+        if (contadorAdultos > 0) {
+          setContadorAdultos(contadorAdultos - cantidad);
+        }
+        break; 
+        case "niños":
+          if (contadorNiños > 0) {
+            setContadorNiños(contadorNiños - cantidad);
+          }
+          break
+
+      case "bebes":
+        if (contadorBebes > 0) {
+          setContadorBebes(contadorBebes - cantidad);
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleOpenModal1 = () => {
     setModal1Open(true);
@@ -146,7 +188,6 @@ const HomeForm = () => {
                         }}
                         value={searchOrigen}
                         onChange={handleSearchOrigen}
-                        
                       />
 
                       <div>
@@ -221,52 +262,51 @@ const HomeForm = () => {
                   onClick={handleOpenModal3}
                   label="Pasajeros"
                   sx={{ m: 1, width: "25ch" }}
+                  value={`Adultos: ${contadorNiños} | Niños: ${contadorAdultos} | Bebés: ${contadorBebes}`}
                 />
                 <ModalDestinos
                   open={modal3Open}
                   onClose={handleCloseModal3}
                   content={
-                    <CantidadPasajeros>
-                      <>
-                       
-                          <p>Adultos (13 + años)</p>
-                         
-                          <p>Niños (2 - 12 años)</p>
-                          
-                          <p>Bebes (5 - 28 meses)</p>
-                         
-                        
-                      </>
-                      <Pasajeros>
-                        <ButtonGroup
-                        color="secondary" aria-label="medium secondary button group"
-                        >
-                          <Adultos>
-                            <Button>-</Button>
-                            <Button>0</Button>
-                            <Button>+</Button>
-                          </Adultos>
-                        </ButtonGroup>
-                        <ButtonGroup
-                          color="secondary" aria-label="medium secondary button group"
-                        >
-                          <Niños>
-                            <Button>-</Button>
-                            <Button>0</Button>
-                            <Button>+</Button>
-                          </Niños>
-                        </ButtonGroup>
-                        <ButtonGroup
-                         color="secondary" aria-label="medium secondary button group"
-                        >
-                          <Bebes>
-                            <Button>-</Button>
-                            <Button>0</Button>
-                            <Button>+</Button>
-                          </Bebes>
-                        </ButtonGroup>
-                      </Pasajeros>
-                    </CantidadPasajeros>
+                    <Pasajeros>
+                      <ButtonGroup
+                        color="secondary"
+                        aria-label="medium secondary button group"
+                      >
+                        <Adultos>
+                          <Button onClick={() => restarContador(1, "niños")}>
+                            -
+                          </Button>
+                          <Button disabled>{contadorNiños}</Button>
+                          <Button onClick={() => sumarContador(1, "niños")}>
+                            +
+                          </Button>
+                        </Adultos>
+                        Adultos (13 + años)
+                      </ButtonGroup>
+                      <ButtonGroup
+                        color="secondary"
+                        aria-label="medium secondary button group"
+                      >
+                        <Niños>
+                        <Button onClick={() => restarContador(1, 'adultos')}>-</Button>
+            <Button disabled>{contadorAdultos}</Button>
+            <Button onClick={() => sumarContador(1, 'adultos')}>+</Button>
+                        </Niños>
+                        Niños (2 - 12 años){" "}
+                      </ButtonGroup>
+                      <ButtonGroup
+                        color="secondary"
+                        aria-label="medium secondary button group"
+                      >
+                        <Bebes>
+                        <Button onClick={() => restarContador(1, 'bebes')}>-</Button>
+            <Button disabled>{contadorBebes}</Button>
+            <Button onClick={() => sumarContador(1, 'bebes')}>+</Button>
+                        </Bebes>
+                        Bebes (5 - 28 meses){" "}
+                      </ButtonGroup>
+                    </Pasajeros>
                   }
                 />
                 <TextField
@@ -341,7 +381,6 @@ const Pasajeros = styled.div`
   display: flex;
   margin-left: 250px;
   margin-top: -150px;
-
 `;
 const Adultos = styled.div`
   display: flex;
@@ -358,14 +397,5 @@ const Bebes = styled.div`
   display: flex;
   margin-top: 20px;
   margin-left: 10px;
-`;
-const CantidadPasajeros = styled.p`
-  white-space: pre;
- 
-::after {
-  
-  white-space: pre;
-  
-}
 `;
 
