@@ -7,6 +7,7 @@ import styled from "styled-components";
 import PlaneIcon from "../../assets/icons/plane.svg";
 import Search from "../../assets/icons/search.svg";
 import ModalDestinos from "./ModalDestinos";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -25,6 +26,20 @@ const HomeForm = () => {
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
+
+  const [searchOrigen,setSearchOrigen]=useState('');
+  const [searchDestino,setSearchDestino]=useState('');
+  const [dataVuelosOrigen,setDataVuelosOrigen]=useState([]);
+const handleSearchOrigen=async(event)=>{
+  setSearchOrigen(event.target.value);
+  console.log(searchOrigen);
+  const response = await axios.get('http://localhost:3004/flights')
+  console.log(response.data);
+  const filterVuelos= response.data.filter((flight)=>
+  flight.departure.airport.toLowerCase().includes(searchOrigen.toLowerCase()))
+  console.log(filterVuelos);
+  setDataVuelosOrigen(dataVuelosOrigen);
+}
 
   const handleOpenModal1 = () => {
     setModal1Open(true);
@@ -48,6 +63,7 @@ const HomeForm = () => {
   const handleCloseModal3 = () => {
     setModal3Open(false);
   };
+  
 
   return (
     <section>
@@ -111,24 +127,39 @@ const HomeForm = () => {
                   label="Origen"
                   sx={{ m: 1, width: "25ch" }}
                 />
-                <ModalDestinos
-                  open={modal1Open}
-                  onClose={handleCloseModal1}
-                  title="¿Dónde te encuentras?"
-                  content={
-                    <TextField
-                      fullWidth
-                      sx={{ mb: 2 }}
-                      InputProps={{
-                        startAdornment: (
-                          <Icon>
-                            <img src={Search} />
-                          </Icon>
-                        ),
-                      }}
-                    />
-                  }
-                />
+  <ModalDestinos
+  open={modal1Open}
+  onClose={handleCloseModal1}
+  title="¿Dónde te encuentras?"
+  content={
+    <>
+      <TextField
+        fullWidth
+        sx={{ mb: 2 }}
+        InputProps={{
+          startAdornment: (
+            <Icon>
+              <img src={Search} alt="Search Icon" />
+            </Icon>
+          ),
+        }}
+        value={searchOrigen}
+        onChange={handleSearchOrigen}
+      />
+
+      <div>
+        { dataVuelosOrigen.length ? (
+          dataVuelosOrigen.map((item, index) => (
+            <span key={index}>{item.departure.airport}</span>
+          ))
+        ) : (
+          <span>sin coincidencias</span>
+        )}
+      </div>
+    </>
+  }
+/>
+               
                 <TextField
                   onClick={handleOpenModal2}
                   label="Destino"
@@ -139,20 +170,33 @@ const HomeForm = () => {
                   onClose={handleCloseModal2}
                   title="¿A dónde viajas?"
                   content={
-                    <TextField
-                      fullWidth
-                      sx={{ mb: 2 }}
-                      InputProps={{
-                        startAdornment: (
-                          <Icon>
-                            <img src={Search} />
-                          </Icon>
-                        ),
-                      }}
-                    />
-                  }
-                  buttonText="Cerrar Modal 2"
-                />
+                    <>
+      <TextField
+        fullWidth
+        sx={{ mb: 2 }}
+        InputProps={{
+          startAdornment: (
+            <Icon>
+              <img src={Search} alt="Search Icon" />
+            </Icon>
+          ),
+        }}
+        value={searchDestino}
+        onChange={handleSearchOrigen}
+      />
+
+      <div>
+        { dataVuelosOrigen.length ? (
+          dataVuelosOrigen.map((item, index) => (
+            <span key={index}>{item.departure.airport}</span>
+          ))
+        ) : (
+          <span>sin coincidencias</span>
+        )}
+      </div>
+    </>
+  }
+/>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box
                     sx={{ display: "flex", m: 0.5, width: "53ch", gap: "25px" }}
