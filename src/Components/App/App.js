@@ -1,13 +1,13 @@
-import React from 'react'
-import HomeForm from '../HomeForm/HomeForm'
+// import React from 'react'
+// import HomeForm from '../HomeForm/HomeForm'
 
-const App = () => {
-  return (
-    <>
-      <HomeForm />
+// const App = () => {
+//   return (
+//     <>
+//       <HomeForm />
       
-    </>
-  )
-}
+//     </>
+//   )
+// }
 
-export default App;
+// export default App;

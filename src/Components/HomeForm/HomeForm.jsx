@@ -27,7 +27,7 @@ const HomeForm = () => {
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
   const [searchOrigen, setSearchOrigen] = useState("");
-  const [searchDestino, setSearchDestino] = useState("");
+  const [searchDestino, setSearchDestino] = useState(null);
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
@@ -133,7 +133,7 @@ const HomeForm = () => {
                   border={1}
                   borderColor="gray"
                   p={0}
-                  width={270}
+                  width={272}
                   height={30}
                   color="white"
                   borderRadius={2}
