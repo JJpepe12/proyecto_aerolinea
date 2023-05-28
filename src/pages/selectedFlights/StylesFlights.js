@@ -6,7 +6,5 @@ font-size: 2rem;
 display: flex;
 flex-direction: column;
 align-items: center;
-h1 {
-    /* margin-left: -72%; */
-}
+background-color: greenyellow
 `;

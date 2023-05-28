@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../Components/layout/Layout";
-import Home from "../Components/home/Home";
+import Home from "../pages/home/Home";
 // import Destination from "../Components/destination/Destination";
 // import Technology from "../Components/technology/Technology";
-import Flights from "../Components/selectedFlights/SelectedFlights";
+import Flights from "../pages/selectedFlights/SelectedFlights";
 
 
 const AppRouter = () => {

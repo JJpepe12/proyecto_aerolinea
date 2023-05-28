@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledSection } from '../Main/StylesPayments';
+import { StyledSection } from '../payments/StylesPayments';
 import { services } from '../../data/Data';
 import Cards from '../footerCards/footerCards';
 import { StyledServices } from './StylesServices';
