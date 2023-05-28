@@ -1,65 +1,62 @@
 import React from "react";
-import { StyleBottonDeparture, StyleDeparture, StyledContainer, StyledDate } from "./StylesDeparture";
-import { StyleCardDateBaggage, StyleTable, StyledTd, StyledTdLast  } from "./StylesCardDateBaggage";
+import { Date, Title, Container, BackpackTable, Td, BackpackCards } from "./StylesDepartures";
 import Briefcase from "../../assets/icons/briefcase.svg";
 import Scala from "../../assets/icons/Scala.png"
 
 
 const Departures = () => {
   return (
-    <div>
-      <StyledDate>
-        <StyledContainer>
-        <h1>Vuelo de Salida</h1>
-        <StyleBottonDeparture>Cambiar vuelo</StyleBottonDeparture>
-        </StyledContainer>
+    <>
+      <Date>
+        <Title>
+        <h1>Vuelo de salida</h1>
+        <button className="btn__change">Cambiar vuelo</button>
+        </Title>
         <h2>Martes 30 nov 2021</h2>
         <h4>Cd. Mex (AICM) a Culiacán </h4>
         <p>Selección de horarios y equipaje</p>
-      </StyledDate>
+      </Date>
       
-      <StyleDeparture>
-      <StyleCardDateBaggage>
-          <StyleTable>
-            <tr>
-              <StyledTd><h2>5:50 PM</h2></StyledTd>
-              <StyledTd><span>2 h 30 min</span> <img src={ Scala }  alt="Escala" /> <span>sin escalas</span> </StyledTd>
-              <StyledTd><h2>6:47 PM</h2></StyledTd>
-              <hr />
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span>1 objeto personal</span><h4>$ 60.000 COP</h4>
-              </StyledTdLast>
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span>Equipaje de mano</span><h4>$ 90.000 COP</h4>
-              </StyledTdLast>
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span> Equipaje 25kg</span><h4>$ 120.000 COP</h4>
-              </StyledTdLast>
-            </tr>
-          </StyleTable>
-      </StyleCardDateBaggage>
+      <Container>
+        <BackpackTable>
+          <tr>
+            <Td><h2>5:50 PM</h2></Td>
+            <Td>1h 57min<img src={ Scala }  alt="Escala" /> sin escalas</Td>
+            <Td><h2>6:47 PM</h2></Td>
+            <hr />
+            <BackpackCards>
+              <img src={ Briefcase }  alt="Briefcase" />1 objeto personal<h2>$ 60.000 COP</h2>
+            </BackpackCards>
+            <BackpackCards>
+              <img src={ Briefcase }  alt="Briefcase" />Equipaje de mano<h2>$ 90.000 COP</h2>
+            </BackpackCards>
+            <BackpackCards>
+              <img src={ Briefcase }  alt="Briefcase" />Equipaje 25kg<h2>$ 120.000 COP</h2>
+            </BackpackCards>
+          </tr>
+        </BackpackTable>
+      </Container>
 
-      <StyleCardDateBaggage>
-          <StyleTable>
+      <Container>
+          <BackpackTable>
             <tr>
-              <StyledTd><h2>8:50 AM</h2></StyledTd>
-              <StyledTd><span>1 h 57 min</span> <img src={ Scala }  alt="Escala" /> <span>sin escalas</span> </StyledTd>
-              <StyledTd><h2>9:47 PM</h2></StyledTd>
+              <Td><h2>8:50 AM</h2></Td>
+              <Td>1 h 57 min <img src={ Scala }  alt="Escala" /> sin escalas</Td>
+              <Td><h2>9:47 PM</h2></Td>
               <hr />
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span>1 objeto personal</span><h4>$ 60.000 COP</h4>
-              </StyledTdLast>
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span>Equipaje de mano</span><h4>$ 90.000 COP</h4>
-              </StyledTdLast>
-              <StyledTdLast>
-                <img src={ Briefcase }  alt="Briefcase" /> <span> Equipaje 25kg</span><h4>$ 120.000 COP</h4>
-              </StyledTdLast>
+              <BackpackCards>
+                <img src={ Briefcase }  alt="Briefcase" />1 objeto personal<h2>$ 60.000 COP</h2>
+              </BackpackCards>
+              <BackpackCards>
+                <img src={ Briefcase }  alt="Briefcase" />Equipaje de mano<h2>$ 90.000 COP</h2>
+              </BackpackCards>
+              <BackpackCards>
+                <img src={ Briefcase }  alt="Briefcase" />Equipaje 25kg<h2>$ 120.000 COP</h2>
+              </BackpackCards>
             </tr>
-          </StyleTable>
-      </StyleCardDateBaggage>
-      </StyleDeparture>
-    </div>
+          </BackpackTable>
+      </Container>
+    </>
   );
 };
 

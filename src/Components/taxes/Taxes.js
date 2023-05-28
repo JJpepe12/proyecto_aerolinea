@@ -19,7 +19,7 @@ const Taxes = () => {
                 <p>$1,034 MXN</p>
                 <p>$471 MXN</p>
                 <p>$75 MXN</p>
-                <h3>$75 MXN</h3>
+                <h2>$548 MXN</h2>
             </Column>
             </Subcontainer>
         </Container>
