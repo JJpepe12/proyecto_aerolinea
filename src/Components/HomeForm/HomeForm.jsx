@@ -26,22 +26,40 @@ const HomeForm = () => {
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
-  const [searchOrigen, setSearchOrigen] = useState("");
-  const [searchDestino, setSearchDestino] = useState(null);
+  const [searchOrigen, setSearchOrigen] = useState('');
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
     console.log(searchOrigen);
-    const response = await axios.get("http://localhost:3004/flights");
+    const response = await axios.get('http://localhost:3000/flights');
     console.log(response.data);
     const filterVuelos = response.data.filter((flight) =>
-      flight.departure.airport
-        .toLowerCase()
-        .includes(searchOrigen.toLowerCase())
+      flight.departure.airport.toLowerCase().includes(searchOrigen.toLowerCase())
     );
     console.log(filterVuelos);
-    setDataVuelosOrigen(dataVuelosOrigen);
+    setDataVuelosOrigen(filterVuelos);
   };
+  const handleOptionClick = (option) => {
+    setSearchOrigen(option);
+    setDataVuelosOrigen([]); 
+  };
+
+  // const [searchOrigen, setSearchOrigen] = useState("");
+  // const [searchDestino, setSearchDestino] = useState(null);
+  // const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
+  // const handleSearchOrigen = async (event) => {
+  //   setSearchOrigen(event.target.value);
+  //   console.log(searchOrigen);
+  //   const response = await axios.get("http://localhost:3000/flights");
+  //   console.log(response.data);
+  //   const filterVuelos = response.data.filter((flight) =>
+  //     flight.departure.airport
+  //       .toLowerCase()
+  //       .includes(searchOrigen.toLowerCase())
+  //   );
+  //   console.log(filterVuelos);
+  //   setDataVuelosOrigen(dataVuelosOrigen);
+  // };
   const [contadorNiños, setContadorNiños] = useState(0);
   const [contadorAdultos, setContadorAdultos] = useState(0);
   const [contadorBebes, setContadorBebes] = useState(0);
@@ -177,6 +195,7 @@ const HomeForm = () => {
                   content={
                     <>
                       <TextField
+                      
                         fullWidth
                         sx={{ mb: 2 }}
                         InputProps={{
@@ -190,15 +209,17 @@ const HomeForm = () => {
                         onChange={handleSearchOrigen}
                       />
 
-                      <div>
-                        {dataVuelosOrigen.length ? (
-                          dataVuelosOrigen.map((item, index) => (
-                            <span key={index}>{item.departure.airport}</span>
-                          ))
-                        ) : (
-                          <span>sin coincidencias</span>
-                        )}
-                      </div>
+<div>
+        {dataVuelosOrigen.length ? (
+          dataVuelosOrigen.map((item, index) => (
+            <li>
+              <ul key={index} onClick={() => handleOptionClick(item.departure.airport)} >{item.departure.airport}</ul>
+            </li> 
+          ))
+        ) : (
+          <span>sin coincidencias</span>
+        )}
+      </div>
                     </>
                   }
                 />
@@ -224,19 +245,19 @@ const HomeForm = () => {
                             </Icon>
                           ),
                         }}
-                        value={searchDestino}
-                        onChange={handleSearchOrigen}
+                        value={searchOrigen}
+        onChange={handleSearchOrigen}
                       />
 
-                      <div>
-                        {dataVuelosOrigen.length ? (
-                          dataVuelosOrigen.map((item, index) => (
-                            <span key={index}>{item.departure.airport}</span>
-                          ))
-                        ) : (
-                          <span>sin coincidencias</span>
-                        )}
-                      </div>
+<div>
+        {dataVuelosOrigen.length ? (
+          dataVuelosOrigen.map((item, index) => (
+            <span key={index}>{item.departure.airport}</span>
+          ))
+        ) : (
+          <span>sin coincidencias</span>
+        )}
+      </div>
                     </>
                   }
                 />
