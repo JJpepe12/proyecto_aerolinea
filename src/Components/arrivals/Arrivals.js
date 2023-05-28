@@ -4,7 +4,7 @@ import { StyleTableArrivals, StyledCardDateArrivals, StyledTdArrivals, StyledTdL
 import Briefcase from "../../assets/icons/briefcase.svg";
 import Scala from "../../assets/icons/Scala.png"
 
-const Arrivals = ({ selectedContainer, handleContainerClick }) => {
+const Arrivals = () => {
   return (
     <div>
       <StyledDateArrival>
@@ -26,14 +26,14 @@ const Arrivals = ({ selectedContainer, handleContainerClick }) => {
                 <StyledTdArrivals><h2>9:47 PM</h2></StyledTdArrivals>
                 <hr />
 
-                <StyledTdLastArrivals selected={selectedContainer === 6} onClick={() => handleContainerClick(6)} >
+                <StyledTdLastArrivals>
                   <img src={ Briefcase }  alt="Briefcase" /> <span>1 objeto personal</span><h4>$ 60.000 COP</h4>
                   </StyledTdLastArrivals >
-                <StyledTdLastArrivals selected={selectedContainer === 7} onClick={() => handleContainerClick(7)}>
+                <StyledTdLastArrivals>
                   <img src={ Briefcase }  alt="Briefcase" /> <span>Equipaje de mano</span><h4>$ 90.000 COP</h4>
                   </StyledTdLastArrivals>
-                <StyledTdLastArrivals selected={selectedContainer === 8} onClick={() => handleContainerClick(8)}>
-                  <img src={ Briefcase }  alt="Briefcase" /> <span> Equiaje 25kg</span><h4>$ 120.000 COP</h4>
+                <StyledTdLastArrivals>
+                  <img src={ Briefcase }  alt="Briefcase" /> <span> Equipaje 25kg</span><h4>$ 120.000 COP</h4>
                   </StyledTdLastArrivals>
 
               </tr>
@@ -47,14 +47,14 @@ const Arrivals = ({ selectedContainer, handleContainerClick }) => {
                 <StyledTdArrivals><span>2 h 30 min</span> <img src={ Scala }  alt="Escala" /> <span>sin escalas</span> </StyledTdArrivals>
                 <StyledTdArrivals><h2>10:47 PM</h2></StyledTdArrivals>
                 <hr />
-                <StyledTdLastArrivals selected={selectedContainer === 9} onClick={() => handleContainerClick(9)}>
+                <StyledTdLastArrivals>
                   <img src={ Briefcase }  alt="Briefcase" /> <span>1 objeto personal</span><h4>$ 60.000 COP</h4> 
                 </StyledTdLastArrivals >
-                <StyledTdLastArrivals selected={selectedContainer === 10} onClick={() => handleContainerClick(10)}>
+                <StyledTdLastArrivals>
                   <img src={ Briefcase }  alt="Briefcase" /> <span>Equipaje de mano</span><h4>$ 90.000 COP</h4>
                 </StyledTdLastArrivals>
-                <StyledTdLastArrivals selected={selectedContainer === 11} onClick={() => handleContainerClick(11)}>
-                  <img src={ Briefcase }  alt="Briefcase" /> <span> Equiaje 25kg</span><h4>$ 120.000 COP</h4>
+                <StyledTdLastArrivals>
+                  <img src={ Briefcase }  alt="Briefcase" /> <span> Equipaje 25kg</span><h4>$ 120.000 COP</h4>
                 </StyledTdLastArrivals>
               </tr>
             </StyleTableArrivals>
