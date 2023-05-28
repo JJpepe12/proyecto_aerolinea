@@ -26,40 +26,52 @@ const HomeForm = () => {
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
-  const [searchOrigen, setSearchOrigen] = useState('');
+  const [searchOrigen, setSearchOrigen] = useState("");
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
+  const [searchDestino, setSearchDestino] = useState("");
+  const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
     console.log(searchOrigen);
-    const response = await axios.get('http://localhost:3000/flights');
+    const response = await axios.get("http://localhost:3000/flights");
     console.log(response.data);
     const filterVuelos = response.data.filter((flight) =>
-      flight.departure.airport.toLowerCase().includes(searchOrigen.toLowerCase())
+      flight.departure.airport
+        .toLowerCase()
+        .includes(searchOrigen.toLowerCase())
     );
     console.log(filterVuelos);
     setDataVuelosOrigen(filterVuelos);
   };
   const handleOptionClick = (option) => {
-    setSearchOrigen(option);
-    setDataVuelosOrigen([]); 
+    setSelectedValue(option);
+    setDataVuelosOrigen([]);
+    updateSearchInputValue(option);
   };
 
-  // const [searchOrigen, setSearchOrigen] = useState("");
-  // const [searchDestino, setSearchDestino] = useState(null);
-  // const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
-  // const handleSearchOrigen = async (event) => {
-  //   setSearchOrigen(event.target.value);
-  //   console.log(searchOrigen);
-  //   const response = await axios.get("http://localhost:3000/flights");
-  //   console.log(response.data);
-  //   const filterVuelos = response.data.filter((flight) =>
-  //     flight.departure.airport
-  //       .toLowerCase()
-  //       .includes(searchOrigen.toLowerCase())
-  //   );
-  //   console.log(filterVuelos);
-  //   setDataVuelosOrigen(dataVuelosOrigen);
-  // };
+  const updateSearchInputValue = (value) => {
+    setSearchOrigen(value);
+  };
+  const handleSearchDestino = async (event) => {
+    setSearchDestino(event.target.value);
+    console.log(searchDestino);
+    const response = await axios.get("http://localhost:3000/flights");
+    console.log(response.data);
+    const filterVuelosDestinos = response.data.filter((flight) =>
+      flight.arrival.airport.toLowerCase().includes(searchDestino.toLowerCase())
+    );
+    console.log(filterVuelosDestinos);
+    setDataVuelosDestino(filterVuelosDestinos);
+  };
+  const handleOptionDestinoClick = (option) => {
+    setSelectedValue(option);
+    setDataVuelosDestino([]);
+    updateSearchInputValueDestino(option);
+  };
+  const updateSearchInputValueDestino = (value) => {
+    setSearchDestino(value);
+  };
   const [contadorNiños, setContadorNiños] = useState(0);
   const [contadorAdultos, setContadorAdultos] = useState(0);
   const [contadorBebes, setContadorBebes] = useState(0);
@@ -86,12 +98,12 @@ const HomeForm = () => {
         if (contadorAdultos > 0) {
           setContadorAdultos(contadorAdultos - cantidad);
         }
-        break; 
-        case "niños":
-          if (contadorNiños > 0) {
-            setContadorNiños(contadorNiños - cantidad);
-          }
-          break
+        break;
+      case "niños":
+        if (contadorNiños > 0) {
+          setContadorNiños(contadorNiños - cantidad);
+        }
+        break;
 
       case "bebes":
         if (contadorBebes > 0) {
@@ -187,7 +199,10 @@ const HomeForm = () => {
                   onClick={handleOpenModal1}
                   label="Origen"
                   sx={{ m: 1, width: "25ch" }}
+                  value={searchOrigen}
+                  onChange={(event) => setSearchOrigen(event.target.value)}
                 />
+
                 <ModalDestinos
                   open={modal1Open}
                   onClose={handleCloseModal1}
@@ -195,7 +210,6 @@ const HomeForm = () => {
                   content={
                     <>
                       <TextField
-                      
                         fullWidth
                         sx={{ mb: 2 }}
                         InputProps={{
@@ -209,26 +223,35 @@ const HomeForm = () => {
                         onChange={handleSearchOrigen}
                       />
 
-<div>
-        {dataVuelosOrigen.length ? (
-          dataVuelosOrigen.map((item, index) => (
-            <li>
-              <ul key={index} onClick={() => handleOptionClick(item.departure.airport)} >{item.departure.airport}</ul>
-            </li> 
-          ))
-        ) : (
-          <span>sin coincidencias</span>
-        )}
-      </div>
+                      <div>
+                        {dataVuelosOrigen.length ? (
+                          dataVuelosOrigen.map((item, index) => (
+                            <li>
+                              <ul
+                                key={index}
+                                onClick={() =>
+                                  handleOptionClick(item.departure.airport)
+                                }
+                              >
+                                {item.departure.airport}
+                              </ul>
+                            </li>
+                          ))
+                        ) : (
+                          <span>sin coincidencias</span>
+                        )}
+                      </div>
                     </>
                   }
                 />
-
                 <TextField
                   onClick={handleOpenModal2}
                   label="Destino"
                   sx={{ m: 1, width: "25ch" }}
+                  value={searchDestino}
+                  onChange={(event) => setSearchDestino(event.target.value)}
                 />
+
                 <ModalDestinos
                   open={modal2Open}
                   onClose={handleCloseModal2}
@@ -245,22 +268,32 @@ const HomeForm = () => {
                             </Icon>
                           ),
                         }}
-                        value={searchOrigen}
-        onChange={handleSearchOrigen}
+                        value={searchDestino}
+                        onChange={handleSearchDestino}
                       />
 
-<div>
-        {dataVuelosOrigen.length ? (
-          dataVuelosOrigen.map((item, index) => (
-            <span key={index}>{item.departure.airport}</span>
-          ))
-        ) : (
-          <span>sin coincidencias</span>
-        )}
-      </div>
+                      <div>
+                        {dataVuelosDestino.length ? (
+                          dataVuelosDestino.map((item, index) => (
+                            <li>
+                              <ul
+                                key={index}
+                                onClick={() =>
+                                  handleOptionDestinoClick(item.arrival.airport)
+                                }
+                              >
+                                {item.arrival.airport}
+                              </ul>
+                            </li>
+                          ))
+                        ) : (
+                          <span>sin coincidencias</span>
+                        )}
+                      </div>
                     </>
                   }
                 />
+
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Box
                     sx={{ display: "flex", m: 0.5, width: "53ch", gap: "25px" }}
@@ -310,9 +343,13 @@ const HomeForm = () => {
                         aria-label="medium secondary button group"
                       >
                         <Niños>
-                        <Button onClick={() => restarContador(1, 'adultos')}>-</Button>
-            <Button disabled>{contadorAdultos}</Button>
-            <Button onClick={() => sumarContador(1, 'adultos')}>+</Button>
+                          <Button onClick={() => restarContador(1, "adultos")}>
+                            -
+                          </Button>
+                          <Button disabled>{contadorAdultos}</Button>
+                          <Button onClick={() => sumarContador(1, "adultos")}>
+                            +
+                          </Button>
                         </Niños>
                         Niños (2 - 12 años){" "}
                       </ButtonGroup>
@@ -321,9 +358,13 @@ const HomeForm = () => {
                         aria-label="medium secondary button group"
                       >
                         <Bebes>
-                        <Button onClick={() => restarContador(1, 'bebes')}>-</Button>
-            <Button disabled>{contadorBebes}</Button>
-            <Button onClick={() => sumarContador(1, 'bebes')}>+</Button>
+                          <Button onClick={() => restarContador(1, "bebes")}>
+                            -
+                          </Button>
+                          <Button disabled>{contadorBebes}</Button>
+                          <Button onClick={() => sumarContador(1, "bebes")}>
+                            +
+                          </Button>
                         </Bebes>
                         Bebes (5 - 28 meses){" "}
                       </ButtonGroup>
@@ -419,4 +460,3 @@ const Bebes = styled.div`
   margin-top: 20px;
   margin-left: 10px;
 `;
-
