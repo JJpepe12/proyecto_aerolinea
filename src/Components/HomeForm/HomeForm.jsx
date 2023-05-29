@@ -8,6 +8,10 @@ import PlaneIcon from "../../assets/icons/plane.svg";
 import Search from "../../assets/icons/search.svg";
 import ModalDestinos from "./ModalDestinos";
 import axios from "axios";
+import { useFormik } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
 import {
   Box,
   Button,
@@ -18,6 +22,7 @@ import {
   Typography,
   Icon,
   ButtonGroup,
+  FormControl,
 } from "@mui/material";
 
 const HomeForm = () => {
@@ -26,11 +31,18 @@ const HomeForm = () => {
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
+  const [contadorNiños, setContadorNiños] = useState(0);
+  const [contadorAdultos, setContadorAdultos] = useState(0);
+  const [contadorBebes, setContadorBebes] = useState(0);
   const [searchOrigen, setSearchOrigen] = useState("");
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
+  const validationSchema = Yup.object().shape({
+    origen: Yup.string().required("El campo Origen es obligatorio"),
+  });
+
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
     console.log(searchOrigen);
@@ -72,9 +84,6 @@ const HomeForm = () => {
   const updateSearchInputValueDestino = (value) => {
     setSearchDestino(value);
   };
-  const [contadorNiños, setContadorNiños] = useState(0);
-  const [contadorAdultos, setContadorAdultos] = useState(0);
-  const [contadorBebes, setContadorBebes] = useState(0);
 
   const sumarContador = (cantidad, tipo) => {
     switch (tipo) {
@@ -115,6 +124,19 @@ const HomeForm = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      origen: "",
+      destino: "",
+      salida: "",
+      regreso: "",
+      pasajeros: "",
+    },
+    onSubmit: (data) => {
+      console.log(data);
+    },
+  });
+
   const handleOpenModal1 = () => {
     setModal1Open(true);
   };
@@ -136,6 +158,15 @@ const HomeForm = () => {
 
   const handleCloseModal3 = () => {
     setModal3Open(false);
+  };
+  const [optionDisabled, setOptionDisabled] = useState(false);
+
+  const handleDisableOption = () => {
+    setOptionDisabled(true);
+  };
+
+  const handleEnableOption = () => {
+    setOptionDisabled(false);
   };
 
   return (
@@ -169,6 +200,7 @@ const HomeForm = () => {
                   borderRadius={2}
                 >
                   <Button
+                    onClick={handleEnableOption}
                     color="primary"
                     sx={{
                       "&:hover": {
@@ -182,6 +214,7 @@ const HomeForm = () => {
                   </Button>
                   <Button
                     color="secondary"
+                    onClick={handleDisableOption}
                     sx={{
                       "&:hover": {
                         backgroundColor: " #80206a",
@@ -194,15 +227,19 @@ const HomeForm = () => {
                   </Button>
                 </Box>
               </Viajes>
-              <Box component="form">
+
+              <form onSubmit={formik.handleSubmit}>
                 <TextField
                   onClick={handleOpenModal1}
                   label="Origen"
                   sx={{ m: 1, width: "25ch" }}
                   value={searchOrigen}
-                  onChange={(event) => setSearchOrigen(event.target.value)}
+                  onChange={(event) => {
+                    setSearchOrigen(event.target.value);
+                    formik.handleChange(event);
+                  }}
+                  name="origen"
                 />
-
                 <ModalDestinos
                   open={modal1Open}
                   onClose={handleCloseModal1}
@@ -249,7 +286,11 @@ const HomeForm = () => {
                   label="Destino"
                   sx={{ m: 1, width: "25ch" }}
                   value={searchDestino}
-                  onChange={(event) => setSearchDestino(event.target.value)}
+                  onChange={(event) => {
+                    setSearchDestino(event.target.value);
+                    formik.handleChange(event);
+                  }}
+                  name="destino"
                 />
 
                 <ModalDestinos
@@ -301,14 +342,22 @@ const HomeForm = () => {
                     <DatePicker
                       label="Salida"
                       value={value}
-                      onChange={(newValue) => setValue(newValue)}
+                      onChange={(newValue) => {
+                        setValue(newValue);
+                        formik.handleChange("salida")(newValue);
+                      }}
                       renderInput={(props) => <TextField {...props} />}
+                      name="salida"
                     />
                     <DatePicker
                       label="Regreso"
-                      value={dataPiker}
-                      onChange={(newValue) => setDataPiker(newValue)}
+                      value={value}
+                      onChange={(newValue) => {
+                        setValue(newValue);
+                        formik.handleChange("regreso")(newValue);
+                      }}
                       renderInput={(props) => <TextField {...props} />}
+                      name="regreso"
                     />
                   </Box>
                 </LocalizationProvider>
@@ -317,6 +366,8 @@ const HomeForm = () => {
                   label="Pasajeros"
                   sx={{ m: 1, width: "25ch" }}
                   value={`Adultos: ${contadorNiños} | Niños: ${contadorAdultos} | Bebés: ${contadorBebes}`}
+                  name="pasajeros"
+                  onChange={formik.handleChange}
                 />
                 <ModalDestinos
                   open={modal3Open}
@@ -390,7 +441,7 @@ const HomeForm = () => {
                     <TextDecoration>Buscar vuelos</TextDecoration>
                   </Button>
                 </StyledButton>
-              </Box>
+              </form>
             </Paper>
           </Grid>
         </Container>
