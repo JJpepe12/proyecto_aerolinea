@@ -8,8 +8,7 @@ import PlaneIcon from "../../assets/icons/plane.svg";
 import Search from "../../assets/icons/search.svg";
 import ModalDestinos from "./ModalDestinos";
 import axios from "axios";
-import { useFormik } from "formik";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import {
@@ -18,13 +17,20 @@ import {
   Container,
   Grid,
   Paper,
-  TextField,
   Typography,
   Icon,
   ButtonGroup,
   FormControl,
 } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
+const validationSchema = Yup.object().shape({
+  origen: Yup.string().required("Este campo es obligatorio"),
+  destino: Yup.string().required("Este campo es obligatorio"),
+  salida: Yup.date().required("La fecha de salida es obligatoria"),
+  regreso: Yup.date().required("La fecha de regreso es obligatoria"),
+  pasajeros: Yup.string().required("Este campo es obligatorio"),
+});
 const HomeForm = () => {
   const [value, setValue] = useState(null);
   const [dataPiker, setDataPiker] = useState(null);
@@ -39,9 +45,6 @@ const HomeForm = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
-  const validationSchema = Yup.object().shape({
-    origen: Yup.string().required("El campo Origen es obligatorio"),
-  });
 
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
@@ -124,19 +127,6 @@ const HomeForm = () => {
     }
   };
 
-  const formik = useFormik({
-    initialValues: {
-      origen: "",
-      destino: "",
-      salida: "",
-      regreso: "",
-      pasajeros: "",
-    },
-    onSubmit: (data) => {
-      console.log(data);
-    },
-  });
-
   const handleOpenModal1 = () => {
     setModal1Open(true);
   };
@@ -167,6 +157,16 @@ const HomeForm = () => {
 
   const handleEnableOption = () => {
     setOptionDisabled(false);
+  };
+
+  const handleSubmit = (values) => {
+    console.log(values); // Realiza las acciones necesarias con los valores del formulario
+  };
+  const validateRegreso = (value) => {
+    if (!value) {
+      return "El campo es requerido";
+    }
+    // Realiza aquí otras validaciones si es necesario
   };
 
   return (
@@ -228,220 +228,300 @@ const HomeForm = () => {
                 </Box>
               </Viajes>
 
-              <form onSubmit={formik.handleSubmit}>
-                <TextField
-                  onClick={handleOpenModal1}
-                  label="Origen"
-                  sx={{ m: 1, width: "25ch" }}
-                  value={searchOrigen}
-                  onChange={(event) => {
-                    setSearchOrigen(event.target.value);
-                    formik.handleChange(event);
-                  }}
-                  name="origen"
-                />
-                <ModalDestinos
-                  open={modal1Open}
-                  onClose={handleCloseModal1}
-                  title="¿Dónde te encuentras?"
-                  content={
-                    <>
-                      <TextField
-                        fullWidth
-                        sx={{ mb: 2 }}
-                        InputProps={{
-                          startAdornment: (
-                            <Icon>
-                              <img src={Search} alt="Search Icon" />
-                            </Icon>
-                          ),
-                        }}
-                        value={searchOrigen}
-                        onChange={handleSearchOrigen}
-                      />
-
-                      <div>
-                        {dataVuelosOrigen.length ? (
-                          dataVuelosOrigen.map((item, index) => (
-                            <li>
-                              <ul
-                                key={index}
-                                onClick={() =>
-                                  handleOptionClick(item.departure.airport)
-                                }
-                              >
-                                {item.departure.airport}
-                              </ul>
-                            </li>
-                          ))
-                        ) : (
-                          <span>sin coincidencias</span>
+              <Formik
+                initialValues={{
+                  origen: "",
+                  destino: "",
+                  salida: null,
+                  regreso: null,
+                  pasajeros: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  <Box display="flex" flexDirection="row">
+                    <Box mr={1}>
+                      <Field name="origen">
+                        {({ field, form }) => (
+                          <>
+                            <TextField
+                              {...field}
+                              onClick={handleOpenModal1}
+                              label="Origen"
+                              sx={{ m: 1, width: "25ch" }}
+                              onBlur={() =>
+                                form.setFieldTouched(field.name, true)
+                              }
+                              value={searchOrigen}
+                              onChange={(event) => {
+                                setSearchOrigen(event.target.value);
+                                form.setFieldValue(
+                                  field.name,
+                                  event.target.value
+                                );
+                              }}
+                            />
+                            <ErrorMessage name="origen" component="div" />
+                          </>
                         )}
-                      </div>
-                    </>
-                  }
-                />
-                <TextField
-                  onClick={handleOpenModal2}
-                  label="Destino"
-                  sx={{ m: 1, width: "25ch" }}
-                  value={searchDestino}
-                  onChange={(event) => {
-                    setSearchDestino(event.target.value);
-                    formik.handleChange(event);
-                  }}
-                  name="destino"
-                />
+                      </Field>
+                    </Box>
 
-                <ModalDestinos
-                  open={modal2Open}
-                  onClose={handleCloseModal2}
-                  title="¿A dónde viajas?"
-                  content={
-                    <>
-                      <TextField
-                        fullWidth
-                        sx={{ mb: 2 }}
-                        InputProps={{
-                          startAdornment: (
-                            <Icon>
-                              <img src={Search} alt="Search Icon" />
-                            </Icon>
-                          ),
-                        }}
-                        value={searchDestino}
-                        onChange={handleSearchDestino}
-                      />
+                    <ModalDestinos
+                      open={modal1Open}
+                      onClose={handleCloseModal1}
+                      title="¿Dónde te encuentras?"
+                      content={
+                        <>
+                          <TextField
+                            fullWidth
+                            sx={{ mb: 2 }}
+                            InputProps={{
+                              startAdornment: (
+                                <Icon>
+                                  <img src={Search} alt="Search Icon" />
+                                </Icon>
+                              ),
+                            }}
+                            value={searchOrigen}
+                            onChange={handleSearchOrigen}
+                          />
 
-                      <div>
-                        {dataVuelosDestino.length ? (
-                          dataVuelosDestino.map((item, index) => (
-                            <li>
-                              <ul
-                                key={index}
-                                onClick={() =>
-                                  handleOptionDestinoClick(item.arrival.airport)
-                                }
-                              >
-                                {item.arrival.airport}
-                              </ul>
-                            </li>
-                          ))
-                        ) : (
-                          <span>sin coincidencias</span>
+                          <div>
+                            {dataVuelosOrigen.length ? (
+                              dataVuelosOrigen.map((item, index) => (
+                                <li>
+                                  <ul
+                                    key={index}
+                                    onClick={() =>
+                                      handleOptionClick(item.departure.airport)
+                                    }
+                                  >
+                                    {item.departure.airport}
+                                  </ul>
+                                </li>
+                              ))
+                            ) : (
+                              <span>sin coincidencias</span>
+                            )}
+                          </div>
+                        </>
+                      }
+                    />
+
+                    <Box mr={1}>
+                      <Field name="destino">
+                        {({ field, form }) => (
+                          <>
+                            <TextField
+                              {...field}
+                              onClick={handleOpenModal2}
+                              label="Destino"
+                              sx={{ m: 1, width: "25ch" }}
+                              onBlur={() =>
+                                form.setFieldTouched(field.name, true)
+                              }
+                              value={searchDestino}
+                              onChange={(event) => {
+                                setSearchDestino(event.target.value);
+                                form.setFieldValue(
+                                  field.name,
+                                  event.target.value
+                                );
+                              }}
+                            />
+                            <ErrorMessage name="destino" component="div" />
+                          </>
                         )}
-                      </div>
-                    </>
-                  }
-                />
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Box
-                    sx={{ display: "flex", m: 0.5, width: "53ch", gap: "25px" }}
-                  >
-                    <DatePicker
-                      label="Salida"
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                        formik.handleChange("salida")(newValue);
-                      }}
-                      renderInput={(props) => <TextField {...props} />}
-                      name="salida"
-                    />
-                    <DatePicker
-                      label="Regreso"
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                        formik.handleChange("regreso")(newValue);
-                      }}
-                      renderInput={(props) => <TextField {...props} />}
-                      name="regreso"
-                    />
+                      </Field>
+                    </Box>
                   </Box>
-                </LocalizationProvider>
-                <TextField
-                  onClick={handleOpenModal3}
-                  label="Pasajeros"
-                  sx={{ m: 1, width: "25ch" }}
-                  value={`Adultos: ${contadorNiños} | Niños: ${contadorAdultos} | Bebés: ${contadorBebes}`}
-                  name="pasajeros"
-                  onChange={formik.handleChange}
-                />
-                <ModalDestinos
-                  open={modal3Open}
-                  onClose={handleCloseModal3}
-                  content={
-                    <Pasajeros>
-                      <ButtonGroup
-                        color="secondary"
-                        aria-label="medium secondary button group"
-                      >
-                        <Adultos>
-                          <Button onClick={() => restarContador(1, "niños")}>
-                            -
-                          </Button>
-                          <Button disabled>{contadorNiños}</Button>
-                          <Button onClick={() => sumarContador(1, "niños")}>
-                            +
-                          </Button>
-                        </Adultos>
-                        Adultos (13 + años)
-                      </ButtonGroup>
-                      <ButtonGroup
-                        color="secondary"
-                        aria-label="medium secondary button group"
-                      >
-                        <Niños>
-                          <Button onClick={() => restarContador(1, "adultos")}>
-                            -
-                          </Button>
-                          <Button disabled>{contadorAdultos}</Button>
-                          <Button onClick={() => sumarContador(1, "adultos")}>
-                            +
-                          </Button>
-                        </Niños>
-                        Niños (2 - 12 años){" "}
-                      </ButtonGroup>
-                      <ButtonGroup
-                        color="secondary"
-                        aria-label="medium secondary button group"
-                      >
-                        <Bebes>
-                          <Button onClick={() => restarContador(1, "bebes")}>
-                            -
-                          </Button>
-                          <Button disabled>{contadorBebes}</Button>
-                          <Button onClick={() => sumarContador(1, "bebes")}>
-                            +
-                          </Button>
-                        </Bebes>
-                        Bebes (5 - 28 meses){" "}
-                      </ButtonGroup>
-                    </Pasajeros>
-                  }
-                />
-                <TextField
-                  label="¿Tienes algun codigo de promocion?"
-                  sx={{ m: 1, width: "25ch" }}
-                />
-                <StyledButton>
-                  <Button
-                    fullWidth
-                    type="submit"
-                    startIcon={
-                      <img
-                        src={PlaneIcon}
-                        alt="Plane Icon"
-                        style={{ color: "blue" }}
-                      />
+                  <ModalDestinos
+                    open={modal2Open}
+                    onClose={handleCloseModal2}
+                    title="¿A dónde viajas?"
+                    content={
+                      <>
+                        <TextField
+                          fullWidth
+                          sx={{ mb: 2 }}
+                          InputProps={{
+                            startAdornment: (
+                              <Icon>
+                                <img src={Search} alt="Search Icon" />
+                              </Icon>
+                            ),
+                          }}
+                          value={searchDestino}
+                          onChange={handleSearchDestino}
+                        />
+
+                        <div>
+                          {dataVuelosDestino.length ? (
+                            dataVuelosDestino.map((item, index) => (
+                              <li>
+                                <ul
+                                  key={index}
+                                  onClick={() =>
+                                    handleOptionDestinoClick(
+                                      item.arrival.airport
+                                    )
+                                  }
+                                >
+                                  {item.arrival.airport}
+                                </ul>
+                              </li>
+                            ))
+                          ) : (
+                            <span>sin coincidencias</span>
+                          )}
+                        </div>
+                      </>
                     }
-                  >
-                    <TextDecoration>Buscar vuelos</TextDecoration>
-                  </Button>
-                </StyledButton>
-              </form>
+                  />
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: 0.5,
+                        width: "53ch",
+                        gap: "25px",
+                      }}
+                    >
+                      <Box>
+                        <Field name="salida">
+                          {({ field, form }) => (
+                            <>
+                              <DatePicker
+                                {...field}
+                                label="Salida"
+                                value={field.value}
+                                onChange={(newValue) => {
+                                  form.setFieldValue(field.name, newValue); // Actualiza el valor del campo en Formik
+                                }}
+                                renderInput={(props) => (
+                                  <TextField {...props} />
+                                )}
+                              />
+                              <ErrorMessage name="salida" component="div" />
+                            </>
+                          )}
+                        </Field>
+                      </Box>
+                      <Box>
+                        <Field name="regreso" validate={validateRegreso}>
+                          {({ field, form }) => (
+                            <>
+                              <DatePicker
+                                {...field}
+                                disabled={optionDisabled}
+                                label="Regreso"
+                                value={field.value}
+                                onChange={(newValue) => {
+                                  form.setFieldValue(field.name, newValue); // Actualiza el valor del campo en Formik
+                                }}
+                                renderInput={(props) => (
+                                  <TextField {...props} />
+                                )}
+                              />
+                              {optionDisabled
+                                ? null
+                                : form.errors.regreso &&
+                                  form.touched.regreso && (
+                                    <div>{form.errors.regreso}</div>
+                                  )}
+                            </>
+                          )}
+                        </Field>
+                      </Box>
+                    </Box>
+                  </LocalizationProvider>
+
+                  <Field
+                    component={TextField}
+                    onClick={handleOpenModal3}
+                    label="Pasajeros"
+                    sx={{ m: 1, width: "25ch" }}
+                    value={`Adultos: ${contadorNiños} | Niños: ${contadorAdultos} | Bebés: ${contadorBebes}`}
+                    name="pasajeros"
+                  />
+                  <ModalDestinos
+                    open={modal3Open}
+                    onClose={handleCloseModal3}
+                    content={
+                      <Pasajeros>
+                        <ButtonGroup
+                          color="secondary"
+                          aria-label="medium secondary button group"
+                        >
+                          <Adultos>
+                            <Button onClick={() => restarContador(1, "niños")}>
+                              -
+                            </Button>
+                            <Button disabled>{contadorNiños}</Button>
+                            <Button onClick={() => sumarContador(1, "niños")}>
+                              +
+                            </Button>
+                          </Adultos>
+                          Adultos (13 + años)
+                        </ButtonGroup>
+                        <ButtonGroup
+                          color="secondary"
+                          aria-label="medium secondary button group"
+                        >
+                          <Niños>
+                            <Button
+                              onClick={() => restarContador(1, "adultos")}
+                            >
+                              -
+                            </Button>
+                            <Button disabled>{contadorAdultos}</Button>
+                            <Button onClick={() => sumarContador(1, "adultos")}>
+                              +
+                            </Button>
+                          </Niños>
+                          Niños (2 - 12 años){" "}
+                        </ButtonGroup>
+                        <ButtonGroup
+                          color="secondary"
+                          aria-label="medium secondary button group"
+                        >
+                          <Bebes>
+                            <Button onClick={() => restarContador(1, "bebes")}>
+                              -
+                            </Button>
+                            <Button disabled>{contadorBebes}</Button>
+                            <Button onClick={() => sumarContador(1, "bebes")}>
+                              +
+                            </Button>
+                          </Bebes>
+                          Bebes (5 - 28 meses){" "}
+                        </ButtonGroup>
+                      </Pasajeros>
+                    }
+                  />
+                  <TextField
+                    label="¿Tienes algun codigo de promocion?"
+                    sx={{ m: 1, width: "25ch" }}
+                  />
+                  <StyledButton>
+                    <Button
+                      fullWidth
+                      type="submit"
+                      startIcon={
+                        <img
+                          src={PlaneIcon}
+                          alt="Plane Icon"
+                          style={{ color: "blue" }}
+                        />
+                      }
+                    >
+                      <TextDecoration>Buscar vuelos</TextDecoration>
+                    </Button>
+                  </StyledButton>
+                </Form>
+              </Formik>
             </Paper>
           </Grid>
         </Container>
