@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 export const StyledServices = styled.div`
 display: flex;
-gap: 2rem;
+gap: 1rem;
 justify-content: space-between;
+margin: 1%;
 
-h3{
+h2{
  margin-bottom: 1rem; 
 }
 `;

@@ -7,7 +7,7 @@ import { StyledServices } from './StylesServices';
 const ServicesCards = () => {
   return (
     <StyledSection> 
-      <h3>Servicios disponibles</h3>
+      <h1 id='titleServices'>Servicios disponibles</h1>
         <StyledServices>
           {services.map((service) => (
           <Cards key={service.id} service={service} />

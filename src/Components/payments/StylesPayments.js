@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const StyledSection = styled.section`
-margin-bottom: 1rem;
-font-size: 2rem;
+margin: 5% 2% 0%;
+font-size: 1.5rem;
 display: flex;
 flex-direction: column;
 align-items: center;
 h1 {
-    /* margin-left: -72%; */
+    margin-left: -80%;
+}
+#titleServices{
+    margin-left: -70%;
 }
 `;
 

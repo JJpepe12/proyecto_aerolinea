@@ -12,7 +12,7 @@ const AppRouter = () => {
     <div>
       <BrowserRouter>
         <Routes>
-         
+        
           <Route path={"/proyecto_aerolinea"} element={<Layout />}>
             <Route index element={<Home />} />
               <Route path="flights" element={<Flights />} />
