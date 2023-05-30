@@ -28,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 h2 {
@@ -36,14 +36,14 @@ h2 {
 }
 
 p {
-  font-family: 'Alata', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   color: var(--very-dark-gray);
 }
 
 button {
   background-color: transparent;
-  font-family: 'Alata', sans-serif;
+  font-family: 'Roboto', sans-serif;
   border: 0;
   color: white;
   cursor: pointer;
