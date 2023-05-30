@@ -19,7 +19,7 @@ import {
   Typography,
   Icon,
   ButtonGroup,
-  FormControl,
+  // FormControl,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -31,8 +31,8 @@ const validationSchema = Yup.object().shape({
   pasajeros: Yup.string().required("Este campo es obligatorio"),
 });
 const HomeForm = () => {
-  const [value, setValue] = useState(null);
-  const [dataPiker, setDataPiker] = useState(null);
+  // const [value, setValue] = useState(null);
+  // const [dataPiker, setDataPiker] = useState(null);
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
@@ -41,7 +41,7 @@ const HomeForm = () => {
   const [contadorBebes, setContadorBebes] = useState(0);
   const [searchOrigen, setSearchOrigen] = useState("");
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  // const [selectedValue, setSelectedValue] = useState("");
   const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
 
@@ -59,7 +59,7 @@ const HomeForm = () => {
     setDataVuelosOrigen(filterVuelos);
   };
   const handleOptionClick = (option) => {
-    setSelectedValue(option);
+    // setSelectedValue(option);
     setDataVuelosOrigen([]);
     updateSearchInputValue(option);
   };
@@ -79,7 +79,7 @@ const HomeForm = () => {
     setDataVuelosDestino(filterVuelosDestinos);
   };
   const handleOptionDestinoClick = (option) => {
-    setSelectedValue(option);
+    // setSelectedValue(option);
     setDataVuelosDestino([]);
     updateSearchInputValueDestino(option);
   };
