@@ -7,18 +7,21 @@ import Home from "../pages/home/Home";
 import Flights from "../pages/selectedFlights/SelectedFlights";
 
 
+
 const AppRouter = () => {
 
   return (
     <div>
       <BrowserRouter>
         <Routes>
+         
           <Route path={"/"} element={<Layout />}>
             <Route index element={<Home />} />
                 <Route path="flights" element={<Flights />} />
                 {/* <Route path="destination" element={<Destination />} />
                 <Route path="technology" element={<Technology />} /> */}
           </Route>
+        
         </Routes>
       </BrowserRouter>
     </div>

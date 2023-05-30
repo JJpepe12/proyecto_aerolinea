@@ -10,7 +10,7 @@ import ModalDestinos from "./ModalDestinos";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
+import { useHistory } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -20,7 +20,6 @@ import {
   Typography,
   Icon,
   ButtonGroup,
-  FormControl,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -158,9 +157,18 @@ const HomeForm = () => {
   const handleEnableOption = () => {
     setOptionDisabled(false);
   };
-
+  
+  const history = useHistory();
   const handleSubmit = (values) => {
-    console.log(values); // Realiza las acciones necesarias con los valores del formulario
+    const isFormFilled = Object.values(values).every((field) => field.trim() !== '');
+
+    if (isFormFilled) {
+      // Redireccionar a la página deseada utilizando history.push
+      history.push('/lights');
+    } else {
+      // Mostrar mensaje de error o tomar alguna otra acción
+      console.log('Por favor, completa todos los campos');
+    }
   };
   const validateRegreso = (value) => {
     if (!value) {
@@ -168,6 +176,7 @@ const HomeForm = () => {
     }
     // Realiza aquí otras validaciones si es necesario
   };
+
 
   return (
     <section>
@@ -309,7 +318,6 @@ const HomeForm = () => {
                         </>
                       }
                     />
-
                     <Box mr={1}>
                       <Field name="destino">
                         {({ field, form }) => (

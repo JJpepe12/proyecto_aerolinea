@@ -1,11 +1,13 @@
 import React from "react";
-import ServicesCards from '../Footer/Services'
-import Payments from "../Main/Payments";
+import HomeForm from '../../Components/HomeForm/HomeForm'
+import ServicesCards from '../../Components/Footer/Services'
+import Payments from "../../Components/payments/Payments";
 
 
 const Home = () => {
     return (
         <>
+        <HomeForm />
         <Payments />
         <ServicesCards />
         </>
