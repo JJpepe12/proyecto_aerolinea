@@ -89,7 +89,7 @@ export const Title = styled.div`
 
   @media (max-width: 375px) {
     top: 470px;
-  
+
   }
 
   .btn__change{
