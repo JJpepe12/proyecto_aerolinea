@@ -20,6 +20,21 @@ export const Figure = styled.div`
   border-radius: 30px;
   margin-left: 350px;
   margin-top: 70px;
+
+  @media (max-width: 1024px) {
+    width: 800px;
+    height: 70vh;
+  }
+
+  @media (max-width: 768px) {
+    width: 920px;
+    height: 93vh;
+  }
+
+  @media (max-width: 426px) {
+    width: 800px;
+    height: 93vh;
+  }
 `;
 
 export const Formulario = styled.section`

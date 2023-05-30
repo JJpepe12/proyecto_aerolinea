@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StylesCards = styled.article`
-width: 270px;
+width: 265px;
 display: flex;
 align-items: center;
 text-align: center;
@@ -17,7 +17,7 @@ img{
     width: 80px;
     height: 80px; 
     &:hover {
-        filter: brightness(50%);
+        filter: brightness(80%);
         cursor: pointer;
       }
 }
@@ -29,4 +29,22 @@ h2{
 p{
     color: gray;
 }
+
+  @media (max-width: 1024px) {
+    width: 220px;
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 243px;
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 426px) {
+    width: 215px;
+  }
 `;
