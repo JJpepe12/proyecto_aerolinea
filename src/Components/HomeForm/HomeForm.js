@@ -19,6 +19,7 @@ import {
   Typography,
   Icon,
   ButtonGroup,
+  FormControl,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -156,9 +157,16 @@ const HomeForm = () => {
   const handleEnableOption = () => {
     setOptionDisabled(false);
   };
-  
 
-
+  const handleSubmit = (values) => {
+    console.log(values); // Realiza las acciones necesarias con los valores del formulario
+  };
+  const validateRegreso = (value) => {
+    if (!value) {
+      return "El campo es requerido";
+    }
+    // Realiza aquí otras validaciones si es necesario
+  };
 
   return (
     <section>
