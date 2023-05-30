@@ -5,7 +5,6 @@ import Arrivals from "../../Components/arrivals/Arrivals";
 import Departures from "../../Components/departures/Departures";
 
 const Flights = () => {
-
   return (
     <>
       <Departures />

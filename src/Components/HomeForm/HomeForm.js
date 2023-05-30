@@ -10,7 +10,6 @@ import ModalDestinos from "./ModalDestinos";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 import {
   Box,
   Button,
@@ -309,7 +308,6 @@ const HomeForm = () => {
                         </>
                       }
                     />
-
                     <Box mr={1}>
                       <Field name="destino">
                         {({ field, form }) => (
