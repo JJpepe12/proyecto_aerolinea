@@ -1,6 +1,6 @@
 import React from "react";
 import HomeForm from '../../Components/HomeForm/HomeForm'
-import ServicesCards from '../../Components/Footer/Services'
+import ServicesCards from '../../Components/footer/Services'
 import Payments from "../../Components/payments/Payments";
 
 

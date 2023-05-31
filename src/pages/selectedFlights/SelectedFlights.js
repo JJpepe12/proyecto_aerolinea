@@ -12,13 +12,13 @@ const Flights = () => {
   
   return (
     <FormularioProvider>
-    <StylesFlights>
-      <Departures />
-      <Arrivals />
-      <Reservations />
-      <Taxes />
-      <ButtonSeats />
-    </StylesFlights>
+      <StylesFlights>
+        <Departures />
+        <Arrivals />
+        <Reservations />
+        <Taxes />
+        <ButtonSeats />
+      </StylesFlights>
     </FormularioProvider>
   );
 };
