@@ -7,9 +7,9 @@ import Payments from "../../Components/payments/Payments";
 const Home = () => {
     return (
         <>
-        <HomeForm />
-        <Payments />
-        <ServicesCards />
+            <HomeForm />
+            <Payments />
+            <ServicesCards />
         </>
     );
 };

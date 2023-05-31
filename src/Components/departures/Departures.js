@@ -3,7 +3,6 @@ import { MyFormularioContext } from '../../pages/selectedFlights/FormularioConte
 import { Date, Title, Container, BackpackTable, Td, BackpackCards } from "./StylesDepartures";
 import Briefcase from "../../assets/icons/briefcase.svg";
 import Scala from "../../assets/icons/Scala.png"
-
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,17 +16,14 @@ const Departures = () => {
 
       // Redireccionar a otra página con los datos
       navigate('/proyecto_aerolinea')
-    
-   
   };
-
 
   return (
     <>
       <Date>
         <Title>
-        <h1>Vuelo de salida</h1>
-        <button   onClick={handleSubmit} className="btn__change">Cambiar vuelo</button>
+          <h1>Vuelo de salida</h1>
+          <button   onClick={handleSubmit} className="btn__change">Cambiar vuelo</button>
         </Title>
         <h2>{salida}</h2>
         <h4>{origen} </h4>

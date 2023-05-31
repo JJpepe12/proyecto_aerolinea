@@ -17,7 +17,7 @@ img{
     width: 80px;
     height: 80px; 
     &:hover {
-        filter: brightness(80%);
+        filter: grayscale(0.8);
         cursor: pointer;
       }
 }

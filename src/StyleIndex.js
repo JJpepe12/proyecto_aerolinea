@@ -55,9 +55,9 @@ button {
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 426px) {
     img {
-    max-width: 60%;
+    max-width: 70%;
     }
   }
 `;
