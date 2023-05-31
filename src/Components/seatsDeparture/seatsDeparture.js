@@ -3,16 +3,14 @@ import React from "react";
 import {
     Date,
     Title,
-
-
     Marks,
     Button,
+    Heading,
+    Text,
     Column,
     Column2,
-    ReferenSeat,
     Row,
     SeatSelect,
-    Subtittle,
 } from "./StylesSeatsDeparture";
 
 const DepartureSeats = () => {
@@ -28,7 +26,7 @@ const DepartureSeats = () => {
                 <p>Selecciona tus asientos</p>
             </Date>
 
-            <ReferenSeat>
+            <Heading>
             <Column>
                 <Row>
                 <Marks>A</Marks>
@@ -37,7 +35,7 @@ const DepartureSeats = () => {
                 </Row>
             </Column>
             <Column>
-                <Marks></Marks>
+                <Marks id="void"></Marks>
             </Column>
             <Column>
                 <Row>
@@ -46,36 +44,37 @@ const DepartureSeats = () => {
                 <Marks>F</Marks>
                 </Row>
             </Column>
-            </ReferenSeat>
-            <Subtittle>
+            </Heading>
+            <Text>
             <h5>Salida Segura</h5>
-            </Subtittle>
+            </Text>
+            
             <SeatSelect>
             <Column>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>1A</Button>
+                <Button>1B</Button>
+                <Button>1C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>2A</Button>
+                <Button>2B</Button>
+                <Button>2C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>3A</Button>
+                <Button>3B</Button>
+                <Button>3C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button className="occupied">4A</Button>
+                <Button className="occupied">4B</Button>
+                <Button>4C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>5A</Button>
+                <Button>5B</Button>
+                <Button>5C</Button>
                 </Row>
             </Column>
             <Column2>
@@ -87,61 +86,61 @@ const DepartureSeats = () => {
             </Column2>
             <Column>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button className="occupied">1D</Button>
+                <Button className="occupied">1E</Button>
+                <Button>1F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>2D</Button>
+                <Button>2E</Button>
+                <Button>2F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button className="occupied">3D</Button>
+                <Button>3E</Button>
+                <Button>3F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>4D</Button>
+                <Button>4E</Button>
+                <Button>4F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>5D</Button>
+                <Button>5E</Button>
+                <Button>5F</Button>
                 </Row>
             </Column>
             </SeatSelect>
-            <Subtittle>
+            <Text>
             <h5>Estándar</h5>
-            </Subtittle>
+            </Text>
             <SeatSelect>
             <Column>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>6A</Button>
+                <Button>6B</Button>
+                <Button>6C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>7A</Button>
+                <Button>7B</Button>
+                <Button>7C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button className="occupied">8A</Button>
+                <Button>8B</Button>
+                <Button className="occupied">8C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>9A</Button>
+                <Button>9B</Button>
+                <Button>9C</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>10A</Button>
+                <Button>10B</Button>
+                <Button>10C</Button>
                 </Row>
             </Column>
             <Column2>
@@ -153,29 +152,29 @@ const DepartureSeats = () => {
             </Column2>
             <Column>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>6D</Button>
+                <Button>6E</Button>
+                <Button>6F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>7D</Button>
+                <Button>7E</Button>
+                <Button>7F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>8D</Button>
+                <Button className="occupied">8E</Button>
+                <Button>8F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>9D</Button>
+                <Button>9E</Button>
+                <Button>9F</Button>
                 </Row>
                 <Row>
-                <Button></Button>
-                <Button></Button>
-                <Button></Button>
+                <Button>10D</Button>
+                <Button>10E</Button>
+                <Button>10F</Button>
                 </Row>
             </Column>
             </SeatSelect>
