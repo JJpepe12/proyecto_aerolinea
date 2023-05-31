@@ -10,6 +10,8 @@ import ModalDestinos from "./ModalDestinos";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -19,6 +21,7 @@ import {
   Typography,
   Icon,
   ButtonGroup,
+  FormControl,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -30,8 +33,8 @@ const validationSchema = Yup.object().shape({
   pasajeros: Yup.string().required("Este campo es obligatorio"),
 });
 const HomeForm = () => {
-  const [value, setValue] = useState(null);
-  const [dataPiker, setDataPiker] = useState(null);
+  const [salida, setSalida] = useState(null);
+  const [regreso, setRegreso] = useState(null);
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
@@ -43,6 +46,14 @@ const HomeForm = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
+
+  const handleSalidaChange = (date) => {
+    setSalida(date);
+  };
+
+  const handleRegresoChange = (date) => {
+    setRegreso(date);
+  };
 
   const handleSearchOrigen = async (event) => {
     setSearchOrigen(event.target.value);
@@ -85,6 +96,8 @@ const HomeForm = () => {
   const updateSearchInputValueDestino = (value) => {
     setSearchDestino(value);
   };
+
+
 
   const sumarContador = (cantidad, tipo) => {
     switch (tipo) {
@@ -156,9 +169,43 @@ const HomeForm = () => {
   const handleEnableOption = () => {
     setOptionDisabled(false);
   };
+
+  // const navigate = useNavigate();
+
+  // const handleSubmit = (values, { setSubmitting, resetForm, form }) => {
+  //   const { errors } = form;
   
-
-
+  //   if (!values.origen || !values.destino || !values.salida || !values.regreso || !values.pasajeros) {
+  //     console.log("Por favor completa todos los campos requeridos");
+    
+  //   }
+  
+  //   else if (Object.entries(errors).length == 0) {
+  //     navigate('/flights');
+  //   }
+  
+  //   setSubmitting(false);
+  // };
+  const handleSubmit = () => {
+    // Obtener los valores de cada componente
+    const origen = searchOrigen;
+    const destino = searchDestino;
+    const niños = contadorNiños;
+    const adultos = contadorAdultos;
+    const bebes = contadorBebes;
+   
+  
+    // Realizar alguna acción con los valores obtenidos, como enviarlos a un servidor o imprimirlos en la consola
+    console.log("Origen:", origen);
+    console.log("Destino:", destino);
+    console.log("Salida:", salida);
+    console.log("Regreso:", regreso);
+    console.log("Niños:", niños);
+    console.log("Adultos:", adultos);
+    console.log("Bebes:", bebes);
+   
+  };
+  
 
   return (
     <section>
@@ -228,9 +275,10 @@ const HomeForm = () => {
                   pasajeros: "",
                 }}
                 validationSchema={validationSchema}
-                onSubmit={handleSubmit}
+              //  onSubmit={handleSubmit}
               >
-                <Form>
+                
+                <Form >
                   <Box display="flex" flexDirection="row">
                     <Box mr={1}>
                       <Field name="origen">
@@ -241,17 +289,11 @@ const HomeForm = () => {
                               onClick={handleOpenModal1}
                               label="Origen"
                               sx={{ m: 1, width: "25ch" }}
-                              onBlur={() =>
-                                form.setFieldTouched(field.name, true)
-                              }
                               value={searchOrigen}
                               onChange={(event) => {
                                 setSearchOrigen(event.target.value);
-                                form.setFieldValue(
-                                  field.name,
-                                  event.target.value
-                                );
                               }}
+                              onFocus={() => form.setFieldError(field.name, '')} // Agrega esta línea
                             />
                             <ErrorMessage name="origen" component="div" />
                           </>
@@ -309,17 +351,12 @@ const HomeForm = () => {
                               onClick={handleOpenModal2}
                               label="Destino"
                               sx={{ m: 1, width: "25ch" }}
-                              onBlur={() =>
-                                form.setFieldTouched(field.name, true)
-                              }
                               value={searchDestino}
                               onChange={(event) => {
                                 setSearchDestino(event.target.value);
-                                form.setFieldValue(
-                                  field.name,
-                                  event.target.value
-                                );
+                            
                               }}
+                               onFocus={() => form.setFieldError(field.name, '')} // Agrega esta línea
                             />
                             <ErrorMessage name="destino" component="div" />
                           </>
@@ -386,30 +423,37 @@ const HomeForm = () => {
                               <DatePicker
                                 {...field}
                                 label="Salida"
-                                value={field.value}
-                                onChange={(newValue) => {
-                                  form.setFieldValue(field.name, newValue); // Actualiza el valor del campo en Formik
+                                value={salida ? new Date(salida) : null}
+                                // selected={salida}
+                                onChange={(date) => {
+                                  form.setFieldValue(field.name, date);
+                                  handleSalidaChange(date);
+                                  // Actualiza el valor del campo en Formik
                                 }}
                                 renderInput={(props) => (
                                   <TextField {...props} />
                                 )}
                               />
                               <ErrorMessage name="salida" component="div" />
+   
                             </>
                           )}
                         </Field>
                       </Box>
                       <Box>
-                        <Field name="regreso" validate={validateRegreso}>
+                        <Field name="regreso">
                           {({ field, form }) => (
                             <>
                               <DatePicker
                                 {...field}
                                 disabled={optionDisabled}
                                 label="Regreso"
-                                value={field.value}
-                                onChange={(newValue) => {
-                                  form.setFieldValue(field.name, newValue); // Actualiza el valor del campo en Formik
+                                value={regreso ? new Date(regreso) : null}
+                                selected={salida}
+                                onChange={(date) => {
+                                  form.setFieldValue(field.name,date); 
+                                  handleRegresoChange(date);
+                                  // Actualiza el valor del campo en Formik
                                 }}
                                 renderInput={(props) => (
                                   <TextField {...props} />
@@ -499,6 +543,7 @@ const HomeForm = () => {
                     <Button
                       fullWidth
                       type="submit"
+                      onClick={handleSubmit}
                       startIcon={
                         <img
                           src={PlaneIcon}
