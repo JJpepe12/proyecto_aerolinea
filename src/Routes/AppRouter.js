@@ -12,8 +12,8 @@ const AppRouter = () => {
     <div>
       <BrowserRouter>
         <Routes>
-         
-          <Route path={"/"} element={<Layout />}>
+        
+          <Route path={"/proyecto_aerolinea"} element={<Layout />}>
             <Route index element={<Home />} />
               <Route path="flights" element={<Flights />} />
               <Route path="seats" element={<Seats />} />

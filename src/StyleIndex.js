@@ -1,12 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-:root {
-  --white: hsl(0, 0%, 100%);
-  --black: hsl(0, 0%, 0%);
-  --dark-gray: hsl(0, 0%, 55%);
-  --very-dark-gray: hsl(0, 0%, 41%);
-}
 
 * {
   margin: 0;
@@ -48,6 +42,24 @@ button {
   color: white;
   cursor: pointer;
 }
+
+  @media (max-width: 1536px) {
+    img {
+    max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    img {
+    max-width: 80%;
+    }
+  }
+
+  @media (max-width: 375px) {
+    img {
+    max-width: 60%;
+    }
+  }
 `;
 
 export default GlobalStyles;

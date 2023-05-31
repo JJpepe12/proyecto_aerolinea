@@ -1,9 +1,7 @@
 import { useState } from "react";
-import imageAvion from "../../assets/avion.webp";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import styled from "styled-components";
 import PlaneIcon from "../../assets/icons/plane.svg";
 import Search from "../../assets/icons/search.svg";
 import ModalDestinos from "./ModalDestinos";
@@ -21,8 +19,10 @@ import {
   Typography,
   Icon,
   ButtonGroup,
+  // FormControl,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { StyledButton, Figure, Formulario, Viajes, TextDecorationButton, Pasajeros, Adultos, Niños, Bebes, TextDecoration  } from "./StyleHomeForm";
 
 const validationSchema = Yup.object().shape({
   origen: Yup.string().required("Este campo es obligatorio"),
@@ -34,15 +34,11 @@ const validationSchema = Yup.object().shape({
 const HomeForm = () => {
   const [salida, setSalida] = useState(null);
   const [regreso, setRegreso] = useState(null);
-  const [modal1Open, setModal1Open] = useState(false);
-  const [modal2Open, setModal2Open] = useState(false);
-  const [modal3Open, setModal3Open] = useState(false);
-  const [contadorNiños, setContadorNiños] = useState(0);
   const [contadorAdultos, setContadorAdultos] = useState(0);
   const [contadorBebes, setContadorBebes] = useState(0);
   const [searchOrigen, setSearchOrigen] = useState("");
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  // const [selectedValue, setSelectedValue] = useState("");
   const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
 
@@ -68,7 +64,7 @@ const HomeForm = () => {
     setDataVuelosOrigen(filterVuelos);
   };
   const handleOptionClick = (option) => {
-    setSelectedValue(option);
+    // setSelectedValue(option);
     setDataVuelosOrigen([]);
     updateSearchInputValue(option);
   };
@@ -88,7 +84,7 @@ const HomeForm = () => {
     setDataVuelosDestino(filterVuelosDestinos);
   };
   const handleOptionDestinoClick = (option) => {
-    setSelectedValue(option);
+    // setSelectedValue(option);
     setDataVuelosDestino([]);
     updateSearchInputValueDestino(option);
   };
@@ -216,7 +212,7 @@ const HomeForm = () => {
             direction="row"
             alignItems="center"
             justifyContent="center"
-            sx={{ minHeigtht: "100vh" }}
+            sx={{ minHeighth: "100vh" }}
           ></Grid>
           <Grid item>
             <Paper sx={{ padding: "1em", borderRadius: "0.5em" }}>
@@ -231,7 +227,7 @@ const HomeForm = () => {
                   border={1}
                   borderColor="gray"
                   p={0}
-                  width={272}
+                  width={260}
                   height={30}
                   color="white"
                   borderRadius={2}
@@ -410,7 +406,7 @@ const HomeForm = () => {
                     <Box
                       sx={{
                         display: "flex",
-                        m: 0.5,
+                        m: 1,
                         width: "53ch",
                         gap: "25px",
                       }}
@@ -475,7 +471,7 @@ const HomeForm = () => {
                     component={TextField}
                     onClick={handleOpenModal3}
                     label="Pasajeros"
-                    sx={{ m: 1, width: "25ch" }}
+                    sx={{ m: 1, width: "25ch", }}
                     value={`Adultos: ${contadorNiños} | Niños: ${contadorAdultos} | Bebés: ${contadorBebes}`}
                     name="pasajeros"
                   />
@@ -497,7 +493,7 @@ const HomeForm = () => {
                               +
                             </Button>
                           </Adultos>
-                          Adultos (13 + años)
+                          <span class="centered-text">Adultos (13 + años)</span>
                         </ButtonGroup>
                         <ButtonGroup
                           color="secondary"
@@ -514,7 +510,7 @@ const HomeForm = () => {
                               +
                             </Button>
                           </Niños>
-                          Niños (2 - 12 años){" "}
+                          <span class="centered-text">Niños (2 - 12 años){" "}</span>
                         </ButtonGroup>
                         <ButtonGroup
                           color="secondary"
@@ -529,14 +525,15 @@ const HomeForm = () => {
                               +
                             </Button>
                           </Bebes>
-                          Bebes (5 - 28 meses){" "}
+                          <span class="centered-text">Bebés (0 - 23 meses){" "}</span>
                         </ButtonGroup>
                       </Pasajeros>
                     }
                   />
                   <TextField
-                    label="¿Tienes algun codigo de promocion?"
-                    sx={{ m: 1, width: "25ch" }}
+                    label ="¿Tienes algún código promocional?"
+                    sx={{ my: 1, mx: 2, width: "25ch", 
+                    '& .MuiInputLabel-root': { fontSize: '14px' } }}
                   />
                   <StyledButton>
                     <Button
@@ -566,62 +563,3 @@ const HomeForm = () => {
 
 export default HomeForm;
 
-const StyledButton = styled.div`
-  background-color: #80206a;
-  border-radius: 25px;
-  width: 28rem;
-  color: white;
-`;
-
-const Figure = styled.div`
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
-    url(${imageAvion});
-  min-height: 300px;
-  min-width: 300px;
-  width: 890px;
-  height: 85vh;
-  background-position: center;
-  background-size: cover;
-  border-radius: 30px;
-  margin-left: 350px;
-  margin-top: 70px;
-`;
-
-const Formulario = styled.section`
-  position: absolute;
-  margin-top: -535px;
-  margin-left: 150px;
-  width: 33rem;
-`;
-
-const Viajes = styled.div`
-  margin-left: 11px;
-`;
-const TextDecoration = styled.div`
-  color: white;
-`;
-const TextDecorationButton = styled.div`
-  color: black;
-`;
-const Pasajeros = styled.div`
-  flex-direction: column;
-  display: flex;
-  margin-left: 250px;
-  margin-top: -150px;
-`;
-const Adultos = styled.div`
-  display: flex;
-  margin-top: 20px;
-  margin-left: 10px;
-  padding: 0;
-`;
-const Niños = styled.div`
-  display: flex;
-  margin-top: 20px;
-  margin-left: 10px;
-`;
-const Bebes = styled.div`
-  display: flex;
-  margin-top: 20px;
-  margin-left: 10px;
-`;

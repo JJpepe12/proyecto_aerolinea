@@ -7,7 +7,7 @@ const Cards = ({ service }) => {
       <figure>
         <img src={service.image} alt={service.name} />
       </figure>
-      <h3>{service.name}</h3>
+      <h2>{service.name}</h2>
       <p>{service.description}</p>
     </StylesCards>
   );
