@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Departures from "../Components/departures/Departures";
 import Layout from "../Components/layout/Layout";
 import Home from "../pages/home/Home";
 import Flights from "../pages/selectedFlights/SelectedFlights";
 import Seats from "../pages/selectedSeats/SelectedSeats";
-import { FormularioProvider } from '../Components/HomeForm/FormularioContext';
+import { FormularioProvider } from '../pages/selectedFlights/FormularioContext';
 import HomeForm from '../Components/HomeForm/HomeForm';
+
 
 const AppRouter = () => {
 
