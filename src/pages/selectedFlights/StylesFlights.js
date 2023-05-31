@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const StylesFlights = styled.section`
-margin-bottom: 1rem;
-font-size: 2rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-background-color: greenyellow
+font-family: 'Lato', sans-serif;
+background-color: #f0f0f0;
 `;

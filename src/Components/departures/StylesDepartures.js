@@ -20,38 +20,33 @@ export const Date = styled.section`
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 1200px) {
-    h2 {
+  @media (max-width: 1024px) {
+    h1 {
       position: relative;
-      top: 300px;
-    }
-
-    h4 {
-      position: relative;
-      top: 300px;
+      top: -285px;
     }
     p {
       position: relative;
-      top: 300px;
+      top: -20px;
     }
   }
   @media (max-width: 768px) {
-    h2 {
+    h1 {
       position: relative;
-      top: 380px;
+      top: 50px;
     }
 
-    h4 {
+    h2, h4 {
       position: relative;
-      top: 380px;
+      top: 410px;
     }
     p {
       position: relative;
-      top: 380px;
+      top: 390px;
     }
   }
   
-  @media (max-width: 375px) {
+  @media (max-width: 426px) {
   
     h2 {
       position: relative;
@@ -85,6 +80,7 @@ export const Title = styled.div`
     flex-direction: column;
     align-items: center;
     top: 428px;
+    right: 7px;
   }
 
   @media (max-width: 375px) {
@@ -112,11 +108,17 @@ export const Title = styled.div`
     color: white;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     margin-bottom: 20px;
-    margin-left: -94px;
+    left: -10px;
     position: relative;
-    top: -19px;
+    top: 55px;
+  }
+  @media (max-width: 426px) {
+    margin-bottom: 20px;
+    left: -10px;
+    position: relative;
+    top: 75px;
     z-index: 2;
   }
   }
@@ -133,7 +135,7 @@ export const Container = styled.section`
   margin-left: 3%;
 
   @media (max-width: 1200px) {
-    width: 100%;
+    width: 96%;
     max-width: 800px;
     position: relative;
     top: 300px;
@@ -142,7 +144,7 @@ export const Container = styled.section`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    top: 372px;
+    top: 410px;
   }
 
   @media (max-width: 375px) {

@@ -10,25 +10,26 @@ export const Container = styled.aside`
         margin-bottom: 10px;
     }
 
-    @media (max-width: 1200px) {
-    position: relative;
-    top: -1171px;
-    left: -1px;
-    width: 29%;
+    @media (max-width: 1440px) {
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    width: 25%;
     }
 
     @media (max-width: 768px) {
         position: relative;
-        top: -1364px;
-        left: -1px;
-        width: 100%;
+        top: -1200px;
+        left: 3%;
+        width: 96%;
     }
 
-    @media (max-width: 375px) {
+    @media (max-width: 426px) {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        top: -3176px;
+        width: 90%;
+        top: -2990px;
+        left: 6%;
     }
 `;
 

@@ -36,35 +36,25 @@ export const Date = styled.section`
     }
   }
   @media (max-width: 768px) {
-    h2 {
-      position: relative;
-      top: 380px;
-    }
-
-    h4 {
+    h2, h4 {
       position: relative;
       top: 380px;
     }
     p {
       position: relative;
-      top: 380px;
+      top: 360px;
     }
   }
   
-  @media (max-width: 375px) {
+  @media (max-width: 426px) {
   
-    h2 {
-      position: relative;
-      top: 440px;
-    }
-
-    h4 {
-      position: relative;
-      top: 440px;
+    h1{
+      position:relative;
+      top: -20px;
     }
     p {
       position: relative;
-      top: 420px;
+      top: 360px;
     }
   }
 `;
@@ -85,9 +75,10 @@ export const Title = styled.div`
     flex-direction: column;
     align-items: center;
     top: 428px;
+    right: 7px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 426px) {
     top: 470px;
   
   }
@@ -113,9 +104,8 @@ export const Title = styled.div`
     color: white;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 426px) {
     margin-bottom: 20px;
-    margin-left: -94px;
     position: relative;
     top: -19px;
     z-index: 2;
@@ -133,11 +123,10 @@ export const Container = styled.section`
   background: white;
   margin-left: 3%;
 
-  @media (max-width: 1200px) {
-    width: 100%;
-    max-width: 800px;
+  @media (max-width: 1440px) {
+    width: 95%;
+    max-width: 950px;
     position: relative;
-    top: 300px;
   }
 
   @media (max-width: 768px) {
@@ -146,7 +135,7 @@ export const Container = styled.section`
     top: 372px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     flex-direction: column;
     align-items: center;
     top: 419px;
@@ -174,7 +163,7 @@ export const BackpackTable = styled.table`
     }
     }
 
-    @media (max-width: 375px) {
+    @media (max-width: 426px) {
     flex-direction: column;
     top: 300px;
     
