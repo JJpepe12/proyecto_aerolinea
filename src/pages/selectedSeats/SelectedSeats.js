@@ -2,8 +2,9 @@ import React from "react";
 import Taxes from "../../Components/taxes/Taxes";
 import Reservations from "../../Components/reservations/Reservations";
 import DepartureSeats from "../../Components/seatsDeparture/seatsDeparture";
+import ArrivalsSeats from "../../Components/seatsArrivals/seatsArrivals";
 import { StylesFlights } from "../selectedFlights/StylesFlights";
-// import ArrivalSeats from "../../Components/arrivals/Arrivals";
+import ButtonPaypal from "../../Components/buttonPaypal/ButtonPaypal";
 
 
 const Seats = () => {
@@ -11,9 +12,10 @@ const Seats = () => {
   return (
     <StylesFlights>
       <DepartureSeats />
-      {/* <ArrivalSeats /> */}
+      <ArrivalsSeats />
       <Reservations />
       <Taxes />
+      <ButtonPaypal />
     </StylesFlights>
   );
 };

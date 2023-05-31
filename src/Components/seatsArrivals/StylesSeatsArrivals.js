@@ -64,6 +64,7 @@ export const Title = styled.div`
     align-items: center;
     width: 950px;
     font-size: 2rem;
+    margin-top:5%;
 
     @media (max-width: 1024px) {
         width: 65%;

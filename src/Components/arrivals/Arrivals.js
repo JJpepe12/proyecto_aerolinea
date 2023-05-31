@@ -2,15 +2,17 @@ import React from "react";
 import { Date, Title, Container, BackpackTable, Td, BackpackCards } from "./StylesArrivals";
 import Briefcase from "../../assets/icons/briefcase.svg";
 import Scala from "../../assets/icons/Scala.png"
-
+import { useNavigate } from 'react-router-dom';
 
 const Arrivals = () => {
+  const navigate = useNavigate();
+  
   return (
     <>
       <Date>
         <Title>
         <h1>Vuelo de regreso</h1>
-        <button className="btn__change">Cambiar vuelo</button>
+        <button className="btn__change" onClick={() => navigate('/proyecto_aerolinea')}>Cambiar vuelo</button>
         </Title>
         <h2>Miércoles 8 dic 2021</h2>
         <h4>Culiacán a Cd. Mex (AICM)</h4>

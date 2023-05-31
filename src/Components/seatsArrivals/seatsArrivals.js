@@ -11,20 +11,20 @@ import {
     Column2,
     Row,
     SeatSelect,
-} from "./StylesSeatsDeparture";
+} from "./StylesSeatsArrivals";
 
-const DepartureSeats = () => {
+const ArrivalsSeats = () => {
     const navigate = useNavigate();
 
     return (
         <>
             <Date>
                 <Title>
-                    <h1>Vuelo de salida</h1>
+                    <h1>Vuelo de regreso</h1>
                     <button className="btn__change" onClick={() => navigate('/proyecto_aerolinea')}>Cambiar vuelo</button>
                 </Title>
-                <h2>Martes 30 nov 2021</h2>
-                <h4>Cd. Mex (AICM) a Culiacán </h4>
+                <h2>Miércoles 8 dic 2021</h2>
+                <h4>Culiacán a Cd. Mex (AICM)</h4>
                 <p>Selecciona tus asientos</p>
             </Date>
 
@@ -184,4 +184,4 @@ const DepartureSeats = () => {
     );
 };
 
-export default DepartureSeats;
+export default ArrivalsSeats;

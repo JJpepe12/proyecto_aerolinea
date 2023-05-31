@@ -4,6 +4,7 @@ import Reservations from "../../Components/reservations/Reservations";
 import Arrivals from "../../Components/arrivals/Arrivals";
 import Departures from "../../Components/departures/Departures";
 import { StylesFlights } from "./StylesFlights"
+import ButtonSeats from "../../Components/buttonSeats/ButtonSeats";
 
 const Flights = () => {
   return (
@@ -12,6 +13,7 @@ const Flights = () => {
       <Arrivals />
       <Reservations />
       <Taxes />
+      <ButtonSeats />
     </StylesFlights>
   );
 };
