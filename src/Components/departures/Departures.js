@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from 'react';
+import { FormularioContext } from '../../Components/HomeForm/FormularioContext';
 import { Date, Title, Container, BackpackTable, Td, BackpackCards } from "./StylesDepartures";
 import Briefcase from "../../assets/icons/briefcase.svg";
 import Scala from "../../assets/icons/Scala.png"
 
 
 const Departures = () => {
+  const { salida, origen } = useContext(FormularioContext);
+
   return (
     <>
       <Date>
@@ -12,8 +15,8 @@ const Departures = () => {
         <h1>Vuelo de salida</h1>
         <button className="btn__change">Cambiar vuelo</button>
         </Title>
-        <h2>Martes 30 nov 2021</h2>
-        <h4>Cd. Mex (AICM) a Culiacán </h4>
+        <h2>{salida}</h2>
+        <h4>{origen} </h4>
         <p>Selección de horarios y equipaje</p>
       </Date>
       

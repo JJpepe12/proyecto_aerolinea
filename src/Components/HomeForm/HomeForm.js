@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -9,7 +9,7 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from 'react-router-dom';
-
+import { FormularioContext } from '../HomeForm/FormularioContext';
 import {
   Box,
   Button,
@@ -23,7 +23,8 @@ import {
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { StyledButton, Figure, Formulario, Viajes, TextDecorationButton, Pasajeros, Adultos, Niños, Bebes, TextDecoration  } from "./StyleHomeForm";
-
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 const validationSchema = Yup.object().shape({
   origen: Yup.string().required("Este campo es obligatorio"),
   destino: Yup.string().required("Este campo es obligatorio"),
@@ -32,14 +33,18 @@ const validationSchema = Yup.object().shape({
   pasajeros: Yup.string().required("Este campo es obligatorio"),
 });
 const HomeForm = () => {
-  const [salida, setSalida] = useState(null);
-  const [regreso, setRegreso] = useState(null);
-  const [contadorAdultos, setContadorAdultos] = useState(0);
-  const [contadorBebes, setContadorBebes] = useState(0);
-  const [searchOrigen, setSearchOrigen] = useState("");
+//  const [salida, setSalida] = useState(null);
+//   const [regreso, setRegreso] = useState(null);
+  const [modal1Open, setModal1Open] = useState(false);
+  const [modal2Open, setModal2Open] = useState(false);
+  const [modal3Open, setModal3Open] = useState(false);
+  // const [contadorNiños, setContadorNiños] = useState(0);
+  // const [contadorAdultos, setContadorAdultos] = useState(0);
+  // const [contadorBebes, setContadorBebes] = useState(0);
+  // const [searchOrigen, setSearchOrigen] = useState("");
   const [dataVuelosOrigen, setDataVuelosOrigen] = useState([]);
-  // const [selectedValue, setSelectedValue] = useState("");
-  const [searchDestino, setSearchDestino] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+  // const [searchDestino, setSearchDestino] = useState("");
   const [dataVuelosDestino, setDataVuelosDestino] = useState([]);
 
   const handleSalidaChange = (date) => {
@@ -165,29 +170,35 @@ const HomeForm = () => {
     setOptionDisabled(false);
   };
 
-  // const navigate = useNavigate();
+  const { actualizarValores } = useContext(FormularioContext);
+  const history = useHistory();
 
-  // const handleSubmit = (values, { setSubmitting, resetForm, form }) => {
-  //   const { errors } = form;
-  
-  //   if (!values.origen || !values.destino || !values.salida || !values.regreso || !values.pasajeros) {
-  //     console.log("Por favor completa todos los campos requeridos");
-    
-  //   }
-  
-  //   else if (Object.entries(errors).length == 0) {
-  //     navigate('/flights');
-  //   }
-  
-  //   setSubmitting(false);
-  // };
-  const handleSubmit = () => {
+  const navigate = useNavigate();
+
+ 
+  const handleSubmit = (event) => {
     // Obtener los valores de cada componente
-    const origen = searchOrigen;
-    const destino = searchDestino;
-    const niños = contadorNiños;
-    const adultos = contadorAdultos;
-    const bebes = contadorBebes;
+    event.preventDefault();
+
+    // Obtén los valores del formulario
+    const origen = event.target.origen.value;
+    const destino = event.target.destino.value;
+    const salida =  event.target.salida.value;
+    const regreso = event.target.regreso.value;
+    const niños = event.target.niños.value;
+    const adultos = event.target.adultos.value;
+    const bebes = event.target.bebes.value;
+
+    //actualizo valores del contexto
+    actualizarValores({ origen, destino, niños, adultos, bebes });
+
+    // const origen = searchOrigen;
+    // const destino = searchDestino;
+    // const salida = setSalida;
+    // const regreso = setRegreso;
+    // const niños = contadorNiños;
+    // const adultos = contadorAdultos;
+    // const bebes = contadorBebes;
    
   
     // Realizar alguna acción con los valores obtenidos, como enviarlos a un servidor o imprimirlos en la consola
@@ -198,6 +209,34 @@ const HomeForm = () => {
     console.log("Niños:", niños);
     console.log("Adultos:", adultos);
     console.log("Bebes:", bebes);
+
+    if (origen && destino && salida && regreso && (niños || adultos || bebes)) {
+      Swal.fire(
+        'Perfecto!',
+        'En la siguiente pagina te mostraremos toda la informacion del vuelo que seleccionaste!',
+        'success'
+      )
+      // Redireccionar a otra página con los datos
+      navigate('/proyecto_aerolinea/flights', {
+        state: {
+          origen,
+          destino,
+          salida,
+          regreso,
+          niños,
+          adultos,
+          bebes,
+        },
+       
+      });
+    } else {
+      // Mostrar un mensaje de error o realizar alguna acción en caso de que los campos requeridos no estén llenos
+      Swal.fire(
+        'Oops!',
+        'No has completado todos los datos!',
+        'error'
+      )
+    }
    
   };
   
