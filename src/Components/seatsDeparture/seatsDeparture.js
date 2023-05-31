@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import {
     Date,
@@ -15,6 +15,13 @@ import {
 
 const DepartureSeats = () => {
     const navigate = useNavigate();
+
+    const [selectedSeat, setSelectedSeat] = useState("");
+
+    const handleSeatSelection = (seat) => {
+        setSelectedSeat(seat);
+        console.log(`La silla seleccionada fue la: ${seat}`);
+    };
 
     return (
         <>
@@ -53,25 +60,25 @@ const DepartureSeats = () => {
             
             <SeatSelect>
             <Column>
-                <Row>
-                <Button>1A</Button>
-                <Button>1B</Button>
-                <Button>1C</Button>
-                </Row>
-                <Row>
-                <Button>2A</Button>
-                <Button>2B</Button>
-                <Button>2C</Button>
-                </Row>
-                <Row>
-                <Button>3A</Button>
-                <Button>3B</Button>
-                <Button>3C</Button>
-                </Row>
+                    <Row>
+                        <Button onClick={() => handleSeatSelection("1A")}>1A</Button>
+                        <Button onClick={() => handleSeatSelection("1B")}>1B</Button>
+                        <Button onClick={() => handleSeatSelection("1C")}>1C</Button>
+                    </Row>
+                    <Row>
+                        <Button onClick={() => handleSeatSelection("2A")}>2A</Button>
+                        <Button onClick={() => handleSeatSelection("2B")}>2B</Button>
+                        <Button onClick={() => handleSeatSelection("2C")}>2C</Button>
+                    </Row>
+                    <Row>
+                        <Button onClick={() => handleSeatSelection("3A")}>3A</Button>
+                        <Button onClick={() => handleSeatSelection("3B")}>3B</Button>
+                        <Button onClick={() => handleSeatSelection("3C")}>3C</Button>
+                    </Row>
                 <Row>
                 <Button className="occupied">4A</Button>
                 <Button className="occupied">4B</Button>
-                <Button>4C</Button>
+                <Button onClick={() => handleSeatSelection("4C")}>4C</Button>
                 </Row>
                 <Row>
                 <Button>5A</Button>
