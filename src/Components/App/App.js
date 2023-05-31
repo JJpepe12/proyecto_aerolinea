@@ -1,20 +1,13 @@
-import React from "react";
-import GlobalStyles from "./StyleApp";
-import Banner from "../Banner/Banner";
-import MainHeader  from "../Main/MainHeader";
-import Footer from '../Footer/Footer'
-import Header from '../Header/Header';
+// import React from 'react'
+// import HomeForm from '../HomeForm/HomeForm'
 
-const App = () => {
-    return (
-        <>
-        <GlobalStyles />
-        <Header/>
-        <Banner />
-        <MainHeader/> 
-        <Footer/>
-        </>
-    );
-};
+// const App = () => {
+//   return (
+//     <>
+//       <HomeForm />
+      
+//     </>
+//   )
+// }
 
-export default App;
+// export default App;
