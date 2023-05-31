@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/proyecto_aerolinea/static/js/main.8ad78d49.js",
+    "main.js": "/proyecto_aerolinea/static/js/main.7b230a2b.js",
     "static/media/famahorro.svg": "/proyecto_aerolinea/static/media/famahorro.f910365f3818eac1750cd956abd5478e.svg",
     "static/media/paypal.svg": "/proyecto_aerolinea/static/media/paypal.fa70400ceb8af2838a953f5b6992b3bf.svg",
     "static/media/mastercard.svg": "/proyecto_aerolinea/static/media/mastercard.7af051105caed8f5eeb1b8fc840b64d6.svg",
@@ -18,11 +18,11 @@
     "static/media/cargo.svg": "/proyecto_aerolinea/static/media/cargo.1d32adacf39737abb9704473fb2ffbf4.svg",
     "index.html": "/proyecto_aerolinea/index.html",
     "static/media/briefcase.svg": "/proyecto_aerolinea/static/media/briefcase.429fd611a0f9c345e6819aa71c3fab6a.svg",
-    "static/media/plane.svg": "/proyecto_aerolinea/static/media/plane.2ee9f0d59defc992ddc06e97166dc446.svg",
+    "static/media/plane.svg": "/proyecto_aerolinea/static/media/plane.9db1247982a48446b5afec52e256da85.svg",
     "static/media/search.svg": "/proyecto_aerolinea/static/media/search.7cb486168035b1e1b0167eb244623a7a.svg",
-    "main.8ad78d49.js.map": "/proyecto_aerolinea/static/js/main.8ad78d49.js.map"
+    "main.7b230a2b.js.map": "/proyecto_aerolinea/static/js/main.7b230a2b.js.map"
   },
   "entrypoints": [
-    "static/js/main.8ad78d49.js"
+    "static/js/main.7b230a2b.js"
   ]
 }
