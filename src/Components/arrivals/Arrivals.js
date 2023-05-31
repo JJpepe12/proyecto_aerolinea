@@ -6,13 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 const Arrivals = () => {
   const navigate = useNavigate();
-  
+  const handleSubmit = () => {
+    // Obtener los valores de cada componente
+
+      // Redireccionar a otra página con los datos
+      navigate('/proyecto_aerolinea')
+  };
+
   return (
     <>
       <Date>
         <Title>
-        <h1>Vuelo de regreso</h1>
-        <button className="btn__change" onClick={() => navigate('/proyecto_aerolinea')}>Cambiar vuelo</button>
+          <h1>Vuelo de regreso</h1>
+          <button  onClick={handleSubmit} className="btn__change">Cambiar vuelo</button>
         </Title>
         <h2>Miércoles 8 dic 2021</h2>
         <h4>Culiacán a Cd. Mex (AICM)</h4>
